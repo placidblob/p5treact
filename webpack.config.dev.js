@@ -3,6 +3,8 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import path from 'path';
 import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
 
+const AntdScssThemePlugin = require('antd-scss-theme-plugin');
+
 export default {
   resolve: {
     extensions: ['*', '.js', '.jsx', '.json'],
@@ -37,15 +39,21 @@ export default {
         collapseWhitespace: true
       },
       inject: true
-    })
+    }),
+    new AntdScssThemePlugin('./ant-theme.scss')
   ],
   module: {
     rules: [
-      {
-        test: /\.jsx?$/,
+      { test: /src(\/|\\)(.+)\.js$/,
+        loader: 'babel-loader',
         exclude: /node_modules/,
-        use: ['babel-loader']
-      },
+        options: {
+          cacheDirectory: true,
+          plugins: [
+            'react-hot-loader/babel',
+            ['import', { libraryName: "antd", style: true }]
+          ]
+        }},
       {
         test: /\.eot(\?v=\d+.\d+.\d+)?$/,
         use: ['file-loader']
@@ -123,6 +131,19 @@ export default {
               sourceMap: true
             }
           }
+        ]
+      },
+      {
+        test: /\.less$/,
+        use: [
+          {loader: "style-loader"},
+          {loader: "css-loader"},
+          AntdScssThemePlugin.themify({loader: "less-loader",
+            options: {
+              javascriptEnabled: true,
+              modules: false
+            }
+          })
         ]
       }
     ]
