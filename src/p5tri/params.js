@@ -1,6 +1,6 @@
 export const zeBalls = [];
 
-export const FLOCK_SIZE = 256;
+export const FLOCK_SIZE = 128;
 
 export const MAX_X = 700;
 export const MAX_Y = 700;

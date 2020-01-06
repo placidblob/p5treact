@@ -13,7 +13,7 @@ export class Ball {
     this.maxX = maxX;
     this.maxY = maxY;
 
-    this.colour = p.color(p.random(128,255), p.random(128,255), p.random(128,255));
+    this.colour = p.color(p.random(0,255), p.random(0,255), p.random(0,255));
 
     this.radius = params.BALL_RADIUS;
     // this.radius = random(0.75*BALL_RADIUS, 1.25*BALL_RADIUS);
