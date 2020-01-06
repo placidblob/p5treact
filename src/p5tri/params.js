@@ -2,8 +2,8 @@ export const zeBalls = [];
 
 export const FLOCK_SIZE = 256;
 
-export const MAX_X = 900;
-export const MAX_Y = 900;
+export const MAX_X = 700;
+export const MAX_Y = 700;
 
 export const BALL_RADIUS = 12;
 export const GRAVITY = 2;

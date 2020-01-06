@@ -19,7 +19,7 @@ export class Ball {
     // this.radius = random(0.75*BALL_RADIUS, 1.25*BALL_RADIUS);
   }
 
-  getAttractiveForce(balls, p) {
+  getAttractiveForce = (balls, p) => {
     const rtrn = p.createVector();
 
     balls.forEach(b => {
@@ -35,9 +35,9 @@ export class Ball {
     rtrn.setMag(params.ATTRACTIVE_FORCE);
 
     return rtrn;
-  }
+  };
 
-  getRepulsiveForce(balls, p) {
+  getRepulsiveForce = (balls, p) => {
     const rtrn = p.createVector();
 
     balls.forEach(b => {
@@ -56,9 +56,9 @@ export class Ball {
     rtrn.setMag(params.ATTRACTIVE_FORCE);
 
     return rtrn;
-  }
+  };
 
-  getNeighbours() {
+  getNeighbours = () => {
     const rtrn = [];
 
     for( let ball of theFlock.zeBalls )
@@ -66,17 +66,33 @@ export class Ball {
         rtrn.push(ball);
 
     return rtrn;
-  }
+  };
 
-  distanceSq(ball) {
+  distanceSq = (ball) => {
     const diffx = this.pos.x - ball.pos.x;
     const diffy = this.pos.y - ball.pos.y;
 
     return diffx * diffx + diffy * diffy;
-  }
+  };
 
-  getColour = (baseColour = true) => {
-    return this.colour;
+  getColour = (neighbours, p) => {
+    if(!neighbours)
+      return this.colour;
+
+    const totals = { r: 0, g: 0, b:0, count:0 };
+
+    for( let n of neighbours) {
+      totals.count++;
+      totals.r += p.red(n.colour);
+      totals.g += p.green(n.colour);
+      totals.b += p.blue(n.colour);
+    }
+
+    return p.color(
+      totals.r / totals.count,
+      totals.g / totals.count,
+      totals.b / totals.count,
+    );
   };
 
   configurations = {
@@ -96,6 +112,7 @@ export class Ball {
         repulsion: true,
 
         limitVelocity: true,
+        colourBleed : true,
       }
     },
     stream: {
@@ -153,11 +170,12 @@ export class Ball {
 
         limitVelocity: true,
         velocity: 2,
+        colourBleed: true,
       }
     },
   };
 
-  step(p, flock) {
+  step = (p, flock) => {
     const config = this.configurations.experimental.behaviour;
 
     const neighbours = this.getNeighbours(flock);
@@ -232,15 +250,13 @@ export class Ball {
     config.limitVelocity && limitVelocity(config.velocity? config.velocity : params.MAX_VELOCITY);
 
     this.pos.add(this.vel);
-  }
 
-  show(p) {
+    this.show(p, config.colourBleed? neighbours : false);
+  };
+
+  show = (p, neighbours) => {
     p.strokeWeight(this.radius * 2);
-    p.stroke(this.getColour());
+    p.stroke(this.getColour(neighbours, p));
     p.point(this.pos.x, this.pos.y);
-  }
-
-  static saveScreenshot(p, filename, extension = 'png') {
-    p.saveCanvas(filename, extension);
-  }
+  };
 }

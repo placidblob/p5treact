@@ -11,6 +11,7 @@ export class Flock {
     p.createCanvas(params.MAX_X, params.MAX_Y);
 
     this.zeBalls = [];
+    this.tick = 0;
 
     for( let i = 0; i < params.FLOCK_SIZE; i++ )
       this.zeBalls.push(new Ball(params.MAX_X, params.MAX_Y, p));
@@ -25,10 +26,8 @@ export class Flock {
 
     p.background(51);
 
-    for( let b of this.zeBalls ) {
+    for( let b of this.zeBalls )
       b.step(p, theFlock);
-      b.show(p);
-    }
   }
 }
 
