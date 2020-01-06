@@ -14,9 +14,7 @@ export class P5triPage
 
   render = () =>
     this.props.p5tri &&
-    <>
-      <h1>T5sting..</h1>
-
+    <div>
       <h2>{ this.props.p5tri.isRunning? 'GOGOGOGOGO' : 'STOPSTOPSTOP' }</h2>
 
       <Button
@@ -27,7 +25,7 @@ export class P5triPage
       >
         { this.props.p5tri.isRunning? '-------' : `>>>>>` }
       </Button>
-    </>
+    </div>
     ||
     <span>bah!</span>;
 }

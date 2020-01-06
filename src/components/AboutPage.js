@@ -8,11 +8,7 @@ const AboutPage = () => {
     <div>
       <h2 className="alt-header">About</h2>
       <p>
-        This example app is part of the <a href="https://github.com/coryhouse/react-slingshot">React-Slingshot
-        starter kit</a>.
-      </p>
-      <p>
-        <Link to="/badlink">Click this bad link</Link> to see the 404 page.
+        Lorem ipsum dolor sit amet consectetur adipiscing elit, urna consequat felis vehicula class ultricies mollis dictumst, aenean non a in donec nulla. Phasellus ante pellentesque erat cum risus consequat imperdiet aliquam, integer placerat et turpis mi eros nec lobortis taciti, vehicula nisl litora tellus ligula porttitor metus.
       </p>
     </div>
   );

@@ -18,12 +18,19 @@ import * as p5triActions from "../actions/p5triActions";
 import * as uiActions from "../actions/uiActions";
 const actions = combine(p5triActions, uiActions);
 
-
-const activeStyle = { color: 'blue' };
-
 const renderHeader = () =>
-  <Header style={{ background: '#fff', padding: 0 }}>
-    Hello there
+  <Header>
+    <div className="logo" />
+    <Menu
+      theme="dark"
+      mode="horizontal"
+      defaultSelectedKeys={['2']}
+      style={{ lineHeight: '64px' }}
+    >
+      <Menu.Item key="1">nav 1</Menu.Item>
+      <Menu.Item key="2">nav 2</Menu.Item>
+      <Menu.Item key="3">nav 3</Menu.Item>
+    </Menu>
   </Header>;
 
 const renderFooter = () => <Footer style={{ textAlign: 'center' }}>Remember what the dormouse said.</Footer>;
@@ -44,39 +51,41 @@ const renderContent = () =>
 class App
     extends React.Component {
 
-  renderSlider = () =>
-    <Sider
+  renderSlider = () => {
+    const activeStyle = { color: 'tomato' };
+
+    return <Sider
       collapsible
       collapsed={this.props.ui.showMainSlider}
       onCollapse={this.props.actions.toggleMainSlider}
     >
-      <div className="logo" />
       <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
         <Menu.Item key="1">
-          <Icon type="pie-chart" />
+          <Icon type="fire"/>
           <NavLink exact to="/" activeStyle={activeStyle}>p5tri</NavLink>
         </Menu.Item>
         <Menu.Item key="2">
-          <Icon type="desktop" />
+          <Icon type="coffee"/>
           <NavLink to="/fuel-savings" activeStyle={activeStyle}>Demo App</NavLink>
         </Menu.Item>
         <Menu.Item key="3">
-          <Icon type="file" />
+          <Icon type="bug"/>
           <NavLink to="/about" activeStyle={activeStyle}>About</NavLink>
         </Menu.Item>
       </Menu>
     </Sider>;
+  };
 
   render() {
     return (
       <Layout style={{ minHeight: '100vh' }}>
-
-        { this.renderSlider() }
-
+        { renderHeader() }
         <Layout>
-          { renderHeader() }
-          { renderContent() }
-          { renderFooter() }
+          { this.renderSlider() }
+          <Layout style={{marginTop: '10px'}}>
+            { renderContent() }
+            { renderFooter() }
+          </Layout>
         </Layout>
       </Layout>
     )
