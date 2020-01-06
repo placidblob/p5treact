@@ -9,6 +9,8 @@ import './styles/styles.scss'; // Yep, that's right. You can import SASS/CSS fil
 require('./favicon.ico'); // Tell webpack to load favicon.ico
 const store = configureStore();
 
+console.log('INITIAL STATE', store.getState());
+
 render(
   <AppContainer>
     <Root store={store} history={history} />

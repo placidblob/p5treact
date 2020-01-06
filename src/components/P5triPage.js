@@ -1,23 +1,57 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { DatePicker, Button } from 'antd';
+import {Button} from 'antd';
+import PropTypes from "prop-types";
+import {bindActionCreators} from "redux";
+import {connect} from "react-redux";
+import {combine} from '../utils'
 
-const P5triPage = () => {
-  return (
-    <div>
-      <h1>React Slingshot</h1>
+import * as p5triActions from "../actions/p5triActions";
+import * as uiActions from "../actions/uiActions";
+const actions = combine(p5triActions, uiActions);
 
-      <h2>Get Started</h2>
-      <ol>
-        <li>Review the <Link to="/fuel-savings">demo app</Link></li>
-        <li>Remove the demo and start coding: npm run remove-demo</li>
-      </ol>
+export class P5triPage
+    extends React.Component {
 
-      <Button> booh </Button>
+  render = () =>
+    this.props.p5tri &&
+    <>
+      <h1>T5sting..</h1>
 
-      <DatePicker/>
-    </div>
-  );
+      <h2>{ this.props.p5tri.isRunning? 'GOGOGOGOGO' : 'STOPSTOPSTOP' }</h2>
+
+      <Button
+        onClick={() => {
+          this.props.actions.playPause();
+        }}
+        style={{width: '90px'}}
+      >
+        { this.props.p5tri.isRunning? '-------' : `>>>>>` }
+      </Button>
+    </>
+    ||
+    <span>bah!</span>;
+}
+
+P5triPage.propTypes = {
+  actions: PropTypes.object.isRequired,
+  p5tri: PropTypes.object.isRequired
 };
 
-export default P5triPage;
+
+function mapStateToProps(state) {
+  return {
+    p5tri: state.p5tri,
+    ui: state.ui
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(actions, dispatch)
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(P5triPage);

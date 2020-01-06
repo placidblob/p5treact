@@ -1,4 +1,10 @@
 export default {
+  p5tri: {
+    isRunning: true,
+  },
+  ui: {
+    showMainSlider: true
+  },
   fuelSavings: {
     newMpg: '',
     tradeMpg: '',
