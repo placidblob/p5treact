@@ -4,21 +4,21 @@ import PropTypes from "prop-types";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import {combine} from '../utils'
-import P5Wrapper from 'react-p5-wrapper';
 
 import * as p5triActions from "../actions/p5triActions";
 import * as uiActions from "../actions/uiActions";
 const actions = combine(p5triActions, uiActions);
 
 import * as p5tri from '../p5tri';
+import {P5triComponent} from "../components/P5triComponent";
 
 export class P5triPage
     extends React.Component {
 
   render = () =>
-    this.props.p5tri &&
+    this.props.p5triParams &&
     <div>
-      <h2>{ this.props.p5tri.isRunning? 'GOGOGOGOGO' : 'STOPSTOPSTOP' }</h2>
+      <h2>{ this.props.p5triParams.isRunning? 'GOGOGOGOGO' : 'STOPSTOPSTOP' }</h2>
 
       <Button
         onClick={() => {
@@ -26,11 +26,10 @@ export class P5triPage
         }}
         style={{width: '90px'}}
       >
-        { this.props.p5tri.isRunning? '-------' : `>>>>>` }
+        { this.props.p5triParams.isRunning? '-------' : `>>>>>` }
       </Button>
 
-      <P5Wrapper
-        sketch={p5tri.sketch}
+      <P5triComponent
       />
 
     </div>
@@ -40,13 +39,14 @@ export class P5triPage
 
 P5triPage.propTypes = {
   actions: PropTypes.object.isRequired,
-  p5tri: PropTypes.object.isRequired
+  p5triParams: PropTypes.object.isRequired,
+  ui: PropTypes.object,
 };
 
 
 function mapStateToProps(state) {
   return {
-    p5tri: state.p5tri,
+    p5triParams: state.p5triParams,
     ui: state.ui
   };
 }

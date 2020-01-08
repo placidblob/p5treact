@@ -1,4 +1,4 @@
-import * as params from './params';
+import * as staticParams from './params';
 import {Ball} from './ball';
 
 export class Flock {
@@ -8,13 +8,13 @@ export class Flock {
   setup = (p) => {
     if(!p) return;
 
-    p.createCanvas(params.MAX_X, params.MAX_Y);
+    p.createCanvas(staticParams.MAX_X, staticParams.MAX_Y);
 
     this.zeBalls = [];
     this.tick = 0;
 
-    for( let i = 0; i < params.FLOCK_SIZE; i++ )
-      this.zeBalls.push(new Ball(params.MAX_X, params.MAX_Y, p));
+    for(let i = 0; i < staticParams.FLOCK_SIZE; i++ )
+      this.zeBalls.push(new Ball(staticParams.MAX_X, staticParams.MAX_Y, p));
   };
 
   // TODO: animated gif stuff - https://gist.github.com/antiboredom/129fd2311dec0046603e

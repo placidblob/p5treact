@@ -1,5 +1,5 @@
 export default {
-  p5tri: {
+  p5triParams: {
     isRunning: true,
   },
   ui: {

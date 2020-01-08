@@ -1,7 +1,11 @@
 import {theFlock} from './flock';
 
-export const sketch = (p) => {
-  p.setup = () => theFlock.setup(p);
+const defaultP5triParams = {
+  isRunning: () => true,
+};
 
-  p.draw = () => theFlock.draw(p);
+export const sketch = (p, getParams = () => defaultP5triParams) => {
+  p.setup = () => theFlock.setup(p, getParams());
+
+  p.draw = () => getParams().isRunning() && theFlock.draw(p, getParams());
 };

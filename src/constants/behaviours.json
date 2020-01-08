@@ -1,0 +1,79 @@
+{
+  "efervescent": {
+    "title": "Efervescent",
+    "description": "ends up looking like gas molecules escaping a liquid",
+    "behaviour": {
+      "deflectX": true,
+      "deflectY": true,
+      "pacmanX": false,
+      "pacmanY": false,
+
+      "gravity": true,
+      "friction": true,
+
+      "attraction": false,
+      "repulsion": true,
+
+      "limitVelocity": true,
+      "colourBleed" : true
+    }
+  },
+  "stream": {
+    "title": "Stream",
+    "description": "they self-organise to act as a stream",
+    "behaviour": {
+      "deflectX": true,
+      "deflectY": false,
+      "pacmanX": false,
+      "pacmanY": true,
+
+      "gravity": true,
+      "friction": true,
+
+      "attraction": true,
+      "repulsion": true,
+
+      "limitVelocity": true,
+      "velocity": 4
+    }
+  },
+  "rotation": {
+    "title": "like a rotating blob",
+    "description": "",
+    "behaviour": {
+      "deflectX": false,
+      "deflectY": false,
+      "pacmanX": true,
+      "pacmanY": true,
+
+      "gravity": false,
+      "friction": true,
+
+      "attraction": true,
+      "repulsion": true,
+
+      "limitVelocity": true,
+      "velocity": 2
+    }
+  },
+  "experimental": {
+    "title": "placeholder for experimentation",
+    "description": "",
+    "behaviour": {
+      "deflectX": false,
+      "deflectY": false,
+      "pacmanX": true,
+      "pacmanY": true,
+
+      "gravity": false,
+      "friction": true,
+
+      "attraction": true,
+      "repulsion": true,
+
+      "limitVelocity": true,
+      "velocity": 2,
+      "colourBleed": true
+    }
+  }
+}

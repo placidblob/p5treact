@@ -2,6 +2,8 @@ import * as params from './params';
 import {theFlock} from './flock'
 import * as p5 from 'p5';
 
+import * as behaviours from '../constants/behaviours';
+
 export class Ball {
 
   constructor( maxX , maxY, p ) {
@@ -95,88 +97,8 @@ export class Ball {
     );
   };
 
-  configurations = {
-    efervescent: {
-      title: "Efervescent",
-      description: "ends up looking like gas molecules escaping a liquid",
-      behaviour: {
-        deflectX: true,
-        deflectY: true,
-        pacmanX: false,
-        pacmanY: false,
-
-        gravity: true,
-        friction: true,
-
-        attraction: false,
-        repulsion: true,
-
-        limitVelocity: true,
-        colourBleed : true,
-      }
-    },
-    stream: {
-      title: "Stream",
-      description: "they self-organise to act as a stream",
-      behaviour: {
-        deflectX: true,
-        deflectY: false,
-        pacmanX: false,
-        pacmanY: true,
-
-        gravity: true,
-        friction: true,
-
-        attraction: true,
-        repulsion: true,
-
-        limitVelocity: true,
-        velocity: 4,
-      }
-    },
-    rotation: {
-      title: "like a rotating blob",
-      description: "",
-      behaviour: {
-        deflectX: false,
-        deflectY: false,
-        pacmanX: true,
-        pacmanY: true,
-
-        gravity: false,
-        friction: true,
-
-        attraction: true,
-        repulsion: true,
-
-        limitVelocity: true,
-        velocity: 2,
-      }
-    },
-    experimental: {
-      title: "placeholder for experimentation",
-      description: "",
-      behaviour: {
-        deflectX: false,
-        deflectY: false,
-        pacmanX: true,
-        pacmanY: true,
-
-        gravity: false,
-        friction: true,
-
-        attraction: true,
-        repulsion: true,
-
-        limitVelocity: true,
-        velocity: 2,
-        colourBleed: true,
-      }
-    },
-  };
-
   step = (p, flock) => {
-    const config = this.configurations.experimental.behaviour;
+    const config = behaviours.stream.behaviour;
 
     const neighbours = this.getNeighbours(flock);
 

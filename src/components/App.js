@@ -1,12 +1,12 @@
 import { NavLink, Route, Switch } from "react-router-dom";
 
-import AboutPage from "./AboutPage";
-import FuelSavingsPage from "./containers/FuelSavingsPage";
-import NotFoundPage from "./NotFoundPage";
+import AboutPage from "../pages/AboutPage";
+import FuelSavingsPage from "../pages/FuelSavingsPage";
+import NotFoundPage from "../pages/NotFoundPage";
 import PropTypes from "prop-types";
 import React from "react";
 import { hot } from "react-hot-loader";
-import P5triPage from "./P5triPage";
+import P5triPage from "../pages/P5triPage";
 import {combine} from '../utils'
 
 import { Layout, Menu, Icon } from 'antd';
@@ -95,13 +95,13 @@ class App
 App.propTypes = {
   children: PropTypes.element,
   actions: PropTypes.object.isRequired,
-  p5tri: PropTypes.object.isRequired,
+  p5triParams: PropTypes.object.isRequired,
   ui: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
   return {
-    p5tri: state.p5tri,
+    p5triParams: state.p5triParams,
     ui: state.ui
   };
 }
