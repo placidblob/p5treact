@@ -1,8 +1,10 @@
 import * as staticParams from './params';
 import {Ball} from './ball';
 
+const zeBalls = [];
+const tick = 0;
+
 export class Flock {
-  zeBalls = [];
   tick = 0;
 
   setup = (p) => {
@@ -10,11 +12,9 @@ export class Flock {
 
     p.createCanvas(staticParams.MAX_X, staticParams.MAX_Y);
 
-    this.zeBalls = [];
-    this.tick = 0;
-
-    for(let i = 0; i < staticParams.FLOCK_SIZE; i++ )
-      this.zeBalls.push(new Ball(staticParams.MAX_X, staticParams.MAX_Y, p));
+    if(zeBalls.length === 0)
+      for(let i = 0; i < staticParams.FLOCK_SIZE; i++ )
+        zeBalls.push(new Ball(staticParams.MAX_X, staticParams.MAX_Y, p));
   };
 
   // TODO: animated gif stuff - https://gist.github.com/antiboredom/129fd2311dec0046603e
@@ -28,8 +28,8 @@ export class Flock {
 
     p.background(51);
 
-    for( let b of this.zeBalls )
-      b.step(p, this, config);
+    for( let b of zeBalls )
+      b.step(p, zeBalls, config);
   }
 }
 

@@ -60,10 +60,10 @@ export class Ball {
     return rtrn;
   };
 
-  getNeighbours = () => {
+  getNeighbours = (balls) => {
     const rtrn = [];
 
-    for( let ball of theFlock.zeBalls )
+    for( let ball of balls )
       if( this.distanceSq(ball) < params.LINE_OF_SIGHT_SQ )
         rtrn.push(ball);
 
@@ -97,8 +97,8 @@ export class Ball {
     );
   };
 
-  step = (p, flock, config) => {
-    const neighbours = this.getNeighbours(flock);
+  step = (p, balls, config) => {
+    const neighbours = this.getNeighbours(balls);
 
     const deflectX = () => {
       if (this.pos.x + this.radius > this.maxX || this.pos.x < this.radius) {
@@ -175,8 +175,10 @@ export class Ball {
   };
 
   show = (p, neighbours) => {
+    p.push();
     p.strokeWeight(this.radius * 2);
     p.stroke(this.getColour(neighbours, p));
     p.point(this.pos.x, this.pos.y);
+    p.pop();
   };
 }
