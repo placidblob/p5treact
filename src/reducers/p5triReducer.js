@@ -4,7 +4,7 @@ import {combine} from '../utils'
 
 const reducerMap = {
   [types.PLAY_PAUSE]: (prevState) => ({isRunning: !prevState.isRunning}),
-  [types.SELECT_BEHAVIOUR]: (prevState, action) => ({behaviour: action.payload}),
+  [types.SELECT_BEHAVIOUR]: (prevState, action) => (action.payload.behaviour),
 };
 
 

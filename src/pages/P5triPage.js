@@ -39,6 +39,7 @@ export class P5triPage
 
   render = () => {
     console.log('>>>>>>', this.props);
+    console.log('cccccc', dish);
 
     return <React.Fragment>
         {
@@ -58,29 +59,20 @@ export class P5triPage
               p5triParams={this.props.p5triParams}
             />
 
-            {/*
         <div style={{ marginTop: 16 }}>
-          <Radio.Group onChange={e => p5triActions.selectBehaviour({behaviour: e.target.value})} defaultValue="">
+          <Radio.Group onChange={e => this.props.actions.selectBehaviour({behaviour: e.target.value})}>
             {
               dish.map((config, index) =>
                 <Radio.Button
                   value={config.behaviour}
                   key={index}
                 >
-                  {config.behaviour.title}
+                  {config.title}
                 </Radio.Button>
               )
             }
-
-            <Radio.Button value="a">Hangzhou</Radio.Button>
-            <Radio.Button value="b" disabled>
-              Shanghai
-            </Radio.Button>
-            <Radio.Button value="c">Beijing</Radio.Button>
-            <Radio.Button value="d">Chengdu</Radio.Button>
           </Radio.Group>
         </div>
-  */}
           </div>
           || this.renderEmpty
         }

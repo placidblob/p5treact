@@ -11,17 +11,23 @@ const actions = combine(p5triActions, uiActions);
 
 import * as p5tri from '../p5tri';
 
-export const P5triComponent = (props) => {
+export class P5triComponent
+  extends React.Component {
 
-  console.log('+++ component props', props);
+  componentDidMount() {
+    console.log('++ P5triComponent didMount - props:', this.props);
+  }
 
-  return <React.Fragment>
-    <P5Wrapper
-      // sketch={p5tri.sketch}
-      sketch={p => p5tri.sketch(p, props.p5triParams)}
-    />
-  </React.Fragment>;
-};
+  render = () => {
+    console.log('+++ component props', this.props);
+
+    return <React.Fragment>
+      <P5Wrapper
+        sketch={p => p5tri.sketch(p, () => this.props.p5triParams)}
+      />
+    </React.Fragment>;
+  };
+}
 
 P5triComponent.propTypes = {
   p5triParams: PropTypes.object.isRequired,

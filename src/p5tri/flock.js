@@ -19,10 +19,12 @@ export class Flock {
 
   // TODO: animated gif stuff - https://gist.github.com/antiboredom/129fd2311dec0046603e
 
-  draw = (p, config) => {
+  draw = (p, getBehaviour) => {
     if(!p) return;
 
     this.tick++;
+
+    const config = getBehaviour();
 
     p.background(51);
 
