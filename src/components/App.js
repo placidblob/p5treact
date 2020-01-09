@@ -1,8 +1,8 @@
 import { NavLink, Route, Switch } from "react-router-dom";
 
-import AboutPage from "../pages/AboutPage";
-import FuelSavingsPage from "../pages/FuelSavingsPage";
-import NotFoundPage from "../pages/NotFoundPage";
+import AboutPage from "../pages/demo/AboutPage";
+import FuelSavingsPage from "../pages/demo/FuelSavingsPage";
+import NotFoundPage from "../pages/demo/NotFoundPage";
 import PropTypes from "prop-types";
 import React from "react";
 import { hot } from "react-hot-loader";

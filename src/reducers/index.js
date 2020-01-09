@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router'
 
-import fuelSavings from './fuelSavingsReducer';
+import fuelSavings from './demo/fuelSavingsReducer';
 import p5triParams from './p5triReducer';
 import ui from './uiReducer';
 

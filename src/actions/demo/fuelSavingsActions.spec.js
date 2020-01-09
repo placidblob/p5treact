@@ -1,9 +1,9 @@
-import * as ActionTypes from '../constants/actionTypes';
+import * as ActionTypes from '../../constants/actionTypes';
 import * as ActionCreators from './fuelSavingsActions';
 
 import MockDate from 'mockdate';
 
-import {getFormattedDateTime} from '../utils/dates';
+import {getFormattedDateTime} from '../../utils/demo/dates';
 
 describe('Actions', () => {
   let dateModified;
