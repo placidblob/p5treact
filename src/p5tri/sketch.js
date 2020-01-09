@@ -1,7 +1,7 @@
 import {theFlock} from './flock';
 
-export const sketch = (p, getBehaviour) => {
-
+export const sketch = (p) => {
+  let behaviour = undefined;
 
   p.setup = () => {
     console.log('$$$ SKETCH.SETUP()')
@@ -9,7 +9,14 @@ export const sketch = (p, getBehaviour) => {
     theFlock.setup(p);
   };
 
-  p.draw = () => theFlock.draw(p, getBehaviour);
-  // p.setup = () => theFlock.setup(p, getParams());
-  // p.draw = () => getParams().isRunning() && theFlock.draw(p, getParams());
+  p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
+    if(!props) return;
+
+    console.log('myCustomRedrawAccordingToNewPropsHandler', props);
+
+    if (props.behaviour)
+      behaviour = props.behaviour;
+  };
+
+  p.draw = () => theFlock.draw(p, behaviour);
 };

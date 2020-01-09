@@ -14,18 +14,25 @@ import * as p5tri from '../p5tri';
 export class P5triComponent
   extends React.Component {
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      stateSketch: p5tri.sketch
+    };
+  }
+
   componentDidMount() {
     console.log('++ P5triComponent didMount - props:', this.props);
   }
 
   render = () => {
-    console.log('+++ component props', this.props);
+    console.log('___ component props', this.props);
 
-    return <React.Fragment>
-      <P5Wrapper
-        sketch={p => p5tri.sketch(p, () => this.props.p5triParams)}
-      />
-    </React.Fragment>;
+    return <P5Wrapper
+      sketch={this.state.stateSketch}
+      behaviour={this.props.p5triParams}
+    />;
   };
 }
 
@@ -36,6 +43,8 @@ P5triComponent.propTypes = {
 
 
 function mapStateToProps(state) {
+  console.log('--- mapStateToProps', state);
+
   return {
     p5triParams: state.p5triParams
   };
