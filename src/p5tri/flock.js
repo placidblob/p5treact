@@ -19,7 +19,7 @@ export class Flock {
 
   // TODO: animated gif stuff - https://gist.github.com/antiboredom/129fd2311dec0046603e
 
-  draw = (p) => {
+  draw = (p, config) => {
     if(!p) return;
 
     this.tick++;
@@ -27,7 +27,7 @@ export class Flock {
     p.background(51);
 
     for( let b of this.zeBalls )
-      b.step(p, theFlock);
+      b.step(p, this, config);
   }
 }
 

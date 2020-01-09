@@ -1,5 +1,5 @@
-{
-  "efervescent": {
+[
+  {
     "title": "Efervescent",
     "description": "ends up looking like gas molecules escaping a liquid",
     "behaviour": {
@@ -17,8 +17,7 @@
       "limitVelocity": true,
       "colourBleed" : true
     }
-  },
-  "stream": {
+  }, {
     "title": "Stream",
     "description": "they self-organise to act as a stream",
     "behaviour": {
@@ -36,9 +35,8 @@
       "limitVelocity": true,
       "velocity": 4
     }
-  },
-  "rotation": {
-    "title": "like a rotating blob",
+  }, {
+    "title": "blob",
     "description": "",
     "behaviour": {
       "deflectX": false,
@@ -55,9 +53,8 @@
       "limitVelocity": true,
       "velocity": 2
     }
-  },
-  "experimental": {
-    "title": "placeholder for experimentation",
+  }, {
+    "title": "sandbox",
     "description": "",
     "behaviour": {
       "deflectX": false,
@@ -76,4 +73,4 @@
       "colourBleed": true
     }
   }
-}
+]

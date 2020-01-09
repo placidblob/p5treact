@@ -11,14 +11,14 @@ const actions = combine(p5triActions, uiActions);
 
 import * as p5tri from '../p5tri';
 
-export const P5triComponent = () => {
-  const zeParams = {
-    isRunning: () => this.props.p5triParams.isRunning()
-  };
+export const P5triComponent = (props) => {
+
+  console.log('+++ component props', props);
 
   return <React.Fragment>
     <P5Wrapper
-      sketch={p => p5tri.sketch(p, zeParams)}
+      // sketch={p5tri.sketch}
+      sketch={p => p5tri.sketch(p, props.p5triParams)}
     />
   </React.Fragment>;
 };

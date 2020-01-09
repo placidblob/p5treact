@@ -1,6 +1,22 @@
 export default {
   p5triParams: {
     isRunning: true,
+    behaviour: {
+      "deflectX": false,
+      "deflectY": false,
+      "pacmanX": true,
+      "pacmanY": true,
+
+      "gravity": false,
+      "friction": true,
+
+      "attraction": true,
+      "repulsion": true,
+
+      "limitVelocity": true,
+      "velocity": 2,
+      "colourBleed": true
+    }
   },
   ui: {
     showMainSlider: true

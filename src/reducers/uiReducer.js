@@ -3,7 +3,7 @@ import initialState from './initialState';
 import {combine} from '../utils';
 
 const reducerMap = {
-  [types.TOGGLE_MAIN_SLIDER]: (state) => ({showMainSlider: !state.showMainSlider}),
+  [types.TOGGLE_MAIN_SLIDER]: (prevState) => ({showMainSlider: !prevState.showMainSlider}),
 };
 
 
@@ -12,9 +12,9 @@ const reducerMap = {
 // create a copy of the state passed and set new values on the copy.
 // Note that I'm using Object.assign to create a copy of current state
 // and update values on the copy.
-export default function uiReducer(state = initialState.ui, action) {
+export default function uiReducer(prevState = initialState.ui, action) {
   if(reducerMap[action.type])
-    return combine(state, reducerMap[action.type](state));
+    return combine(prevState, reducerMap[action.type](prevState));
 
-  return state;
+  return prevState;
 }

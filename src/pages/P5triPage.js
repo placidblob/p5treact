@@ -1,45 +1,97 @@
 import React from 'react';
-import {Button} from 'antd';
+import {Button, Radio, Tag} from 'antd';
 import PropTypes from "prop-types";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import {combine} from '../utils'
+import * as _ from 'lodash';
 
 import * as p5triActions from "../actions/p5triActions";
 import * as uiActions from "../actions/uiActions";
+import {P5triComponent} from "../components/P5triComponent";
+
 const actions = combine(p5triActions, uiActions);
 
-import * as p5tri from '../p5tri';
-import {P5triComponent} from "../components/P5triComponent";
+const dish = require('../constants/dish.json');
 
 export class P5triPage
     extends React.Component {
 
-  render = () =>
-    this.props.p5triParams &&
-    <div>
-      <h2>{ this.props.p5triParams.isRunning? 'GOGOGOGOGO' : 'STOPSTOPSTOP' }</h2>
+  componentDidMount() {
+  }
 
-      <Button
-        onClick={() => {
-          this.props.actions.playPause();
-        }}
-        style={{width: '90px'}}
-      >
-        { this.props.p5triParams.isRunning? '-------' : `>>>>>` }
-      </Button>
+  sendBeh = () => {
+    // console.log('--- dish', dish);
+    console.log('++++ sending', _.last(dish));
+    this.props.actions.selectBehaviour(_.last(dish).behaviour);
 
-      <P5triComponent
-      />
+    console.log('++++++', this.props);
+  };
 
-    </div>
-    ||
-    <span>bah!</span>;
+  renderEmpty =
+    <span>
+      <Tag color='lime'>beep</Tag>
+      <Tag color='orange'>brrp</Tag>
+      please load a behaviour.
+      <Tag color='orange'>boing</Tag>
+      <Tag color='lime'>doink</Tag>
+     </span>;
+
+  render = () => {
+    console.log('>>>>>>', this.props);
+
+    return <React.Fragment>
+        {
+          this.props.p5triParams && <div>
+            <h2>{this.props.p5triParams.isRunning ? 'GOGOGOGOGO' : 'STOPSTOPSTOP'}</h2>
+
+            <Button
+              onClick={() => {
+                this.props.actions.playPause();
+              }}
+              style={{width: '90px'}}
+            >
+              {this.props.p5triParams.isRunning ? '-------' : `>>>>>`}
+            </Button>
+
+            <P5triComponent
+              p5triParams={this.props.p5triParams}
+            />
+
+            {/*
+        <div style={{ marginTop: 16 }}>
+          <Radio.Group onChange={e => p5triActions.selectBehaviour({behaviour: e.target.value})} defaultValue="">
+            {
+              dish.map((config, index) =>
+                <Radio.Button
+                  value={config.behaviour}
+                  key={index}
+                >
+                  {config.behaviour.title}
+                </Radio.Button>
+              )
+            }
+
+            <Radio.Button value="a">Hangzhou</Radio.Button>
+            <Radio.Button value="b" disabled>
+              Shanghai
+            </Radio.Button>
+            <Radio.Button value="c">Beijing</Radio.Button>
+            <Radio.Button value="d">Chengdu</Radio.Button>
+          </Radio.Group>
+        </div>
+  */}
+          </div>
+          || this.renderEmpty
+        }
+        <Button onClick={this.sendBeh}>beh</Button>
+      </React.Fragment>;
+  }
 }
 
 P5triPage.propTypes = {
   actions: PropTypes.object.isRequired,
-  p5triParams: PropTypes.object.isRequired,
+  p5triParams: PropTypes.object,
   ui: PropTypes.object,
 };
 

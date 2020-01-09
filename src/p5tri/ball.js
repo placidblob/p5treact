@@ -2,7 +2,7 @@ import * as params from './params';
 import {theFlock} from './flock'
 import * as p5 from 'p5';
 
-import * as behaviours from '../constants/behaviours';
+const dish = require('../constants/dish');
 
 export class Ball {
 
@@ -97,9 +97,7 @@ export class Ball {
     );
   };
 
-  step = (p, flock) => {
-    const config = behaviours.stream.behaviour;
-
+  step = (p, flock, config) => {
     const neighbours = this.getNeighbours(flock);
 
     const deflectX = () => {
