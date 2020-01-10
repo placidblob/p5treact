@@ -26,3 +26,20 @@ export function selectBehaviour(settings) {
     });
   };
 }
+
+export function changeAttribute(settings) {
+  return function (dispatch) {
+
+    console.log('+++ dispatching', {
+      type: types.CHANGE_ATTRIBUTE,
+      payload: settings
+    });
+
+    // thunks allow for pre-processing actions, calling apis, and dispatching multiple actions
+    // in this case at this point we could call a service that would persist the fuel savings
+    return dispatch({
+      type: types.CHANGE_ATTRIBUTE,
+      payload: settings
+    });
+  };
+}

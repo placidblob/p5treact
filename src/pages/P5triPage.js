@@ -67,7 +67,11 @@ export class P5triPage
                 p5triParams={this.props.p5triParams}
               />
 
-              <ConfigEditor config={this.props.p5triParams}/>
+              <ConfigEditor
+                config={this.props.p5triParams}
+                // TODO?
+                actions={this.props.actions}
+              />
             </span>
             {this.renderBehaviourSelector()}
           </>

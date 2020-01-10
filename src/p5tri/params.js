@@ -6,7 +6,10 @@ export const MAX_X = 700;
 export const MAX_Y = 700;
 
 export const BALL_RADIUS = 12;
+
+
 export const GRAVITY = 2;
+export const ATTRACTIVE_FORCE = GRAVITY;
 export const FRICTION = 0.004;
 
 export const MAX_VELOCITY = 6 * GRAVITY;
@@ -19,4 +22,3 @@ export const LINE_OF_SIGHT_SQ = LINE_OF_SIGHT * LINE_OF_SIGHT;
 
 export let tick = 0;
 
-export const ATTRACTIVE_FORCE = GRAVITY;

@@ -1,5 +1,25 @@
 [
   {
+    "title": "Gassy",
+    "description": "",
+    "behaviour": {
+      "deflectX": true,
+      "deflectY": true,
+      "pacmanX": false,
+      "pacmanY": false,
+
+      "gravity": false,
+      "friction": true,
+
+      "attraction": false,
+      "repulsion": true,
+
+      "limitVelocity": true,
+
+      "colourBleed" : true,
+      "colourBleedIntensity": 0.5
+    }
+  }, {
     "title": "Efervescent",
     "description": "ends up looking like gas molecules escaping a liquid",
     "behaviour": {

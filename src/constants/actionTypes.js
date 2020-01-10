@@ -6,6 +6,7 @@ export const CALCULATE_FUEL_SAVINGS = 'CALCULATE_FUEL_SAVINGS';
 
 export const PLAY_PAUSE = 'PLAY_PAUSE';
 export const SELECT_BEHAVIOUR = 'SELECT_BEHAVIOUR';
+export const CHANGE_ATTRIBUTE = 'CHANGE_ATTRIBUTE';
 
 
 //////////////////// ui actions ////////////////////
