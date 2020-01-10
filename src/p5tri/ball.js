@@ -21,62 +21,6 @@ export class Ball {
     // this.radius = random(0.75*BALL_RADIUS, 1.25*BALL_RADIUS);
   }
 
-  getAttractiveForce = (balls, p) => {
-    const rtrn = p.createVector();
-
-    balls.forEach(b => {
-      const force = p.createVector(b.pos.x - this.pos.x, b.pos.y - this.pos.y);
-
-      const distSq = this.distanceSq(b);
-
-      force.setMag((distSq - params.COZY_DISTANCE_SQ) / params.COZY_DISTANCE_SQ );
-
-      rtrn.add(force);
-    });
-
-    rtrn.setMag(params.ATTRACTIVE_FORCE);
-
-    return rtrn;
-  };
-
-  getRepulsiveForce = (balls, p) => {
-    const rtrn = p.createVector();
-
-    balls.forEach(b => {
-      const force = p.createVector(b.pos.x - this.pos.x, b.pos.y - this.pos.y);
-
-      const distSq = this.distanceSq(b);
-
-      if(distSq >= params.COZY_DISTANCE_SQ)
-        return;
-
-      force.setMag((params.COZY_DISTANCE_SQ - distSq) / params.COZY_DISTANCE_SQ);
-
-      rtrn.add(force);
-    });
-
-    rtrn.setMag(params.ATTRACTIVE_FORCE);
-
-    return rtrn;
-  };
-
-  getNeighbours = (balls, config) => {
-    const rtrn = [];
-
-    for( let ball of balls )
-      if( this.distanceSq(ball) < config.line_of_sight )
-        rtrn.push(ball);
-
-    return rtrn;
-  };
-
-  distanceSq = (ball) => {
-    const diffx = this.pos.x - ball.pos.x;
-    const diffy = this.pos.y - ball.pos.y;
-
-    return diffx * diffx + diffy * diffy;
-  };
-
   getColour = (p, neighbours, config) => {
     if(!config || !config.colourBleed)
       return this.colour;
@@ -96,19 +40,65 @@ export class Ball {
       totals.b / totals.count
     );
 
-    const avg = (a, b, weightA) => (a * weightA) + b * (1 - weightA);
-
     return p.lerpColor(this.colour, neighbourColor, config.colourBleedIntensity);
-
-    // return p.color(
-    //   avg(totals.r, p.red(this.colour), config.colourBleedIntensity),
-    //   avg(totals.g, p.green(this.colour), config.colourBleedIntensity),
-    //   avg(totals.b, p.blue(this.colour), config.colourBleedIntensity),
-    // );
   };
 
   step = (p, balls, config) => {
-    const neighbours = this.getNeighbours(balls, config);
+    const getAttractiveForce = () => {
+      const rtrn = p.createVector();
+
+      balls.forEach(b => {
+        const force = p.createVector(b.pos.x - this.pos.x, b.pos.y - this.pos.y);
+
+        const distSq = distanceSq(b);
+
+        force.setMag((distSq - params.COZY_DISTANCE_SQ) / params.COZY_DISTANCE_SQ );
+
+        rtrn.add(force);
+      });
+
+      rtrn.setMag(params.ATTRACTIVE_FORCE);
+
+      return rtrn;
+    };
+
+    const getRepulsiveForce = () => {
+      const rtrn = p.createVector();
+
+      balls.forEach(b => {
+        const force = p.createVector(b.pos.x - this.pos.x, b.pos.y - this.pos.y);
+
+        const distSq = distanceSq(b);
+
+        if(distSq >= params.COZY_DISTANCE_SQ)
+          return;
+
+        force.setMag((params.COZY_DISTANCE_SQ - distSq) / params.COZY_DISTANCE_SQ);
+
+        rtrn.add(force);
+      });
+
+      rtrn.setMag(params.ATTRACTIVE_FORCE);
+
+      return rtrn;
+    };
+
+    const getNeighbours = () => {
+      const rtrn = [];
+
+      for( let ball of balls )
+        if( distanceSq(ball) < config.line_of_sight )
+          rtrn.push(ball);
+
+      return rtrn;
+    };
+
+    const distanceSq = (ball) => {
+      const diffx = this.pos.x - ball.pos.x;
+      const diffy = this.pos.y - ball.pos.y;
+
+      return diffx * diffx + diffy * diffy;
+    };
 
     const deflectX = () => {
       if (this.pos.x + this.radius > this.maxX || this.pos.x < this.radius) {
@@ -150,13 +140,13 @@ export class Ball {
     };
 
     const attraction = () => {
-      const attr = this.getAttractiveForce(neighbours, p);
+      const attr = getAttractiveForce();
 
       this.vel.add(attr);
     };
 
     const repulsion = () => {
-      const attr = this.getRepulsiveForce(neighbours, p);
+      const attr = getRepulsiveForce();
 
       this.vel.sub(attr);
     };
@@ -165,6 +155,8 @@ export class Ball {
       if( this.vel.mag() > limitTo )
         this.vel.setMag(limitTo);
     };
+
+    const neighbours = getNeighbours(balls, config);
 
     config.deflectX && deflectX();
     config.deflectY && deflectY();
