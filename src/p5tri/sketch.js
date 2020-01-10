@@ -4,7 +4,7 @@ export const sketch = (p) => {
   let props = undefined; // see p5triParams in initialState.js for format
 
   p.setup = () => {
-    console.log('$$$ SKETCH.SETUP()')
+    console.log('$$$ SKETCH.SETUP()');
 
     theFlock.setup(p);
   };
