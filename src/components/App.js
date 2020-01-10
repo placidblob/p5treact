@@ -33,7 +33,7 @@ const renderHeader = () =>
     </Menu>
   </Header>;
 
-const renderFooter = () => <Footer style={{ textAlign: 'center' }}>Remember what the dormouse said.</Footer>;
+const renderFooter = () => <Footer class='footer'>Remember what the dormouse said.</Footer>;
 
 const renderContent = () =>
   <Content style={{ margin: '0 16px' }}>

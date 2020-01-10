@@ -15,7 +15,8 @@ export default {
 
       "limitVelocity": true,
       "velocity": 2,
-      "colourBleed": true
+      "colourBleed": true,
+      "colourBleedIntensity": 0.5
     }
   },
   ui: {

@@ -15,7 +15,9 @@
       "repulsion": true,
 
       "limitVelocity": true,
-      "colourBleed" : true
+
+      "colourBleed" : true,
+      "colourBleedIntensity": 0.5
     }
   }, {
     "title": "Stream",
@@ -33,7 +35,10 @@
       "repulsion": true,
 
       "limitVelocity": true,
-      "velocity": 4
+      "velocity": 4,
+
+      "colourBleed": true,
+      "colourBleedIntensity": 0.5
     }
   }, {
     "title": "blob",
@@ -51,7 +56,10 @@
       "repulsion": true,
 
       "limitVelocity": true,
-      "velocity": 2
+      "velocity": 2,
+
+      "colourBleed": true,
+      "colourBleedIntensity": 0.5
     }
   }, {
     "title": "sandbox",
@@ -70,7 +78,9 @@
 
       "limitVelocity": true,
       "velocity": 2,
-      "colourBleed": true
+
+      "colourBleed": true,
+      "colourBleedIntensity": 0.7
     }
   }
 ]

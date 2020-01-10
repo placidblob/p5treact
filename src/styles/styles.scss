@@ -37,3 +37,23 @@ td.fuel-savings-label { width: 175px; }
   margin: 16px 28px 16px 0;
   float: left;
 }
+
+.flexRow {
+  display: flex;
+  flex-direction: row;
+  align-content: flex-end;
+  align-items: center;
+  margin-bottom: 3px;
+}
+
+.flexCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer {
+  text-align: center;
+  font-weight: lighter;
+  font-style: oblique;
+  opacity: 15%;
+}

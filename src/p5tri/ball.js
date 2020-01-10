@@ -77,8 +77,8 @@ export class Ball {
     return diffx * diffx + diffy * diffy;
   };
 
-  getColour = (neighbours, p) => {
-    if(!neighbours)
+  getColour = (p, neighbours, config) => {
+    if(!config || !config.colourBleed)
       return this.colour;
 
     const totals = { r: 0, g: 0, b:0, count:0 };
@@ -90,10 +90,16 @@ export class Ball {
       totals.b += p.blue(n.colour);
     }
 
+    totals.r = totals.r / totals.count;
+    totals.g = totals.g / totals.count;
+    totals.b = totals.b / totals.count;
+
+    const avg = (a, b, weightA) => (a * weightA) + b * (1 - weightA);
+
     return p.color(
-      totals.r / totals.count,
-      totals.g / totals.count,
-      totals.b / totals.count,
+      avg(totals.r, p.red(this.colour), config.colourBleedIntensity),
+      avg(totals.g, p.green(this.colour), config.colourBleedIntensity),
+      avg(totals.b, p.blue(this.colour), config.colourBleedIntensity),
     );
   };
 
@@ -171,13 +177,13 @@ export class Ball {
 
     this.pos.add(this.vel);
 
-    this.show(p, config.colourBleed? neighbours : false);
+    this.show(p, neighbours, config);
   };
 
-  show = (p, neighbours) => {
+  show = (p, neighbours, config) => {
     p.push();
     p.strokeWeight(this.radius * 2);
-    p.stroke(this.getColour(neighbours, p));
+    p.stroke(this.getColour(p, neighbours, config));
     p.point(this.pos.x, this.pos.y);
     p.pop();
   };

@@ -9,6 +9,7 @@ import * as _ from 'lodash';
 import * as p5triActions from "../actions/p5triActions";
 import * as uiActions from "../actions/uiActions";
 import {P5triComponent} from "../components/P5triComponent";
+import {ConfigEditor} from "../components/ConfigEditor";
 
 const actions = combine(p5triActions, uiActions);
 
@@ -20,14 +21,6 @@ export class P5triPage
   componentDidMount() {
   }
 
-  sendBeh = () => {
-    // console.log('--- dish', dish);
-    console.log('++++ sending', _.last(dish));
-    this.props.actions.selectBehaviour(_.last(dish).behaviour);
-
-    console.log('++++++', this.props);
-  };
-
   renderEmpty =
     <span>
       <Tag color='lime'>beep</Tag>
@@ -37,12 +30,27 @@ export class P5triPage
       <Tag color='lime'>doink</Tag>
      </span>;
 
+  renderBehaviourSelector =  () => <span style={{ marginTop: 16 }}>
+    <Radio.Group onChange={e => this.props.actions.selectBehaviour({behaviour: e.target.value})}>
+      {
+        dish.map((config, index) =>
+          <Radio.Button
+            value={config.behaviour}
+            key={index}
+          >
+            {config.title}
+          </Radio.Button>
+        )
+      }
+    </Radio.Group>
+  </span>;
+
   render = () => {
     console.log('>>>>>> page props', this.props);
 
-    return <React.Fragment>
+    return <>
         {
-          this.props.p5triParams && <div>
+          this.props.p5triParams && <>
             <h2>{this.props.p5triParams.isRunning ? 'GOGOGOGOGO' : 'STOPSTOPSTOP'}</h2>
 
             <Button
@@ -54,28 +62,18 @@ export class P5triPage
               {this.props.p5triParams.isRunning ? '-------' : `>>>>>`}
             </Button>
 
-            <P5triComponent
-              p5triParams={this.props.p5triParams}
-            />
+            <span className={'flexRow'}>
+              <P5triComponent
+                p5triParams={this.props.p5triParams}
+              />
 
-        <div style={{ marginTop: 16 }}>
-          <Radio.Group onChange={e => this.props.actions.selectBehaviour({behaviour: e.target.value})}>
-            {
-              dish.map((config, index) =>
-                <Radio.Button
-                  value={config.behaviour}
-                  key={index}
-                >
-                  {config.title}
-                </Radio.Button>
-              )
-            }
-          </Radio.Group>
-        </div>
-          </div>
+              <ConfigEditor config={this.props.p5triParams}/>
+            </span>
+            {this.renderBehaviourSelector()}
+          </>
           || this.renderEmpty
         }
-      </React.Fragment>;
+      </>;
   }
 }
 
