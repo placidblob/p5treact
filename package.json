@@ -28,7 +28,7 @@
     "test:watch": "jest --watchAll",
     "open:cover": "npm run test:cover && open-cli ./coverage/lcov-report/index.html",
     "analyze-bundle": "babel-node ./tools/analyzeBundle.js",
-    "clean": "rm -rf node_modules/ package-lock.json dist"
+    "clean": "rm -rf node_modules/ package-lock.json dist yarn.lock"
   },
   "author": "yak",
   "license": "MIT",
