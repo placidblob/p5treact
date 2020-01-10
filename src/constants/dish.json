@@ -37,7 +37,7 @@
       "limitVelocity": true,
       "velocity": 4,
 
-      "colourBleed": true,
+      "colourBleed": false,
       "colourBleedIntensity": 0.5
     }
   }, {
@@ -58,7 +58,7 @@
       "limitVelocity": true,
       "velocity": 2,
 
-      "colourBleed": true,
+      "colourBleed": false,
       "colourBleedIntensity": 0.5
     }
   }, {
