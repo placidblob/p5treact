@@ -31,7 +31,7 @@ export class P5triComponent
 
     return <P5Wrapper
       sketch={this.state.stateSketch}
-      behaviour={this.props.p5triParams}
+      props={this.props.p5triParams}
     />;
   };
 }

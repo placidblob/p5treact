@@ -1,7 +1,7 @@
 import {theFlock} from './flock';
 
 export const sketch = (p) => {
-  let behaviour = undefined;
+  let props = undefined; // see p5triParams in initialState.js for format
 
   p.setup = () => {
     console.log('$$$ SKETCH.SETUP()')
@@ -9,14 +9,13 @@ export const sketch = (p) => {
     theFlock.setup(p);
   };
 
-  p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
-    if(!props) return;
+  p.myCustomRedrawAccordingToNewPropsHandler = (newParams) => {
+    if(!newParams || !newParams.props) return;
 
-    console.log('myCustomRedrawAccordingToNewPropsHandler', props);
+    console.log('myCustomRedrawAccordingToNewPropsHandler', newParams.props);
 
-    if (props.behaviour)
-      behaviour = props.behaviour;
+    props = newParams.props;
   };
 
-  p.draw = () => theFlock.draw(p, behaviour);
+  p.draw = () => props && props.isRunning && theFlock.draw(p, props.behaviour);
 };

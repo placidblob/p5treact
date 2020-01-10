@@ -38,8 +38,7 @@ export class P5triPage
      </span>;
 
   render = () => {
-    console.log('>>>>>>', this.props);
-    console.log('cccccc', dish);
+    console.log('>>>>>> page props', this.props);
 
     return <React.Fragment>
         {
@@ -76,7 +75,6 @@ export class P5triPage
           </div>
           || this.renderEmpty
         }
-        <Button onClick={this.sendBeh}>beh</Button>
       </React.Fragment>;
   }
 }
