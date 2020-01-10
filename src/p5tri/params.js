@@ -18,7 +18,7 @@ export const COZY = 8;
 export const COZY_DISTANCE = COZY * BALL_RADIUS;
 export const COZY_DISTANCE_SQ = COZY_DISTANCE * COZY_DISTANCE;
 export const LINE_OF_SIGHT = COZY_DISTANCE * 2;
-export const LINE_OF_SIGHT_SQ = LINE_OF_SIGHT * LINE_OF_SIGHT;
+export const LINE_OF_SIGHT_SQ = 1024;
 
 export let tick = 0;
 

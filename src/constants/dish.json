@@ -1,5 +1,28 @@
 [
   {
+    "title": "Particles",
+    "description": "",
+    "behaviour": {
+      "deflectX": true,
+      "deflectY": true,
+      "pacmanX": true,
+      "pacmanY": true,
+
+      "gravity": true,
+      "friction": true,
+
+      "attraction": true,
+      "repulsion": true,
+
+      "limitVelocity": true,
+      "velocity": 4,
+
+      "colourBleed" : true,
+      "colourBleedIntensity": 0.5,
+
+      "line_of_sight": 10000
+    }
+  }, {
     "title": "Gassy",
     "description": "",
     "behaviour": {
@@ -15,9 +38,12 @@
       "repulsion": true,
 
       "limitVelocity": true,
+      "velocity": 4,
 
       "colourBleed" : true,
-      "colourBleedIntensity": 0.5
+      "colourBleedIntensity": 0.5,
+
+      "line_of_sight": 10000
     }
   }, {
     "title": "Efervescent",
@@ -35,9 +61,12 @@
       "repulsion": true,
 
       "limitVelocity": true,
+      "velocity": 4,
 
       "colourBleed" : true,
-      "colourBleedIntensity": 0.5
+      "colourBleedIntensity": 0.5,
+
+      "line_of_sight": 10000
     }
   }, {
     "title": "Stream",
@@ -58,7 +87,9 @@
       "velocity": 4,
 
       "colourBleed": false,
-      "colourBleedIntensity": 0.5
+      "colourBleedIntensity": 0.5,
+
+      "line_of_sight": 10000
     }
   }, {
     "title": "blob",
@@ -79,7 +110,9 @@
       "velocity": 2,
 
       "colourBleed": false,
-      "colourBleedIntensity": 0.5
+      "colourBleedIntensity": 0.5,
+
+      "line_of_sight": 10000
     }
   }, {
     "title": "sandbox",
@@ -100,7 +133,9 @@
       "velocity": 2,
 
       "colourBleed": true,
-      "colourBleedIntensity": 0.7
+      "colourBleedIntensity": 0.7,
+
+      "line_of_sight": 10000
     }
   }
 ]

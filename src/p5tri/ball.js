@@ -60,11 +60,11 @@ export class Ball {
     return rtrn;
   };
 
-  getNeighbours = (balls) => {
+  getNeighbours = (balls, config) => {
     const rtrn = [];
 
     for( let ball of balls )
-      if( this.distanceSq(ball) < params.LINE_OF_SIGHT_SQ )
+      if( this.distanceSq(ball) < config.line_of_sight )
         rtrn.push(ball);
 
     return rtrn;
@@ -90,21 +90,25 @@ export class Ball {
       totals.b += p.blue(n.colour);
     }
 
-    totals.r = totals.r / totals.count;
-    totals.g = totals.g / totals.count;
-    totals.b = totals.b / totals.count;
+    const neighbourColor = p.color(
+      totals.r / totals.count,
+      totals.g / totals.count,
+      totals.b / totals.count
+    );
 
     const avg = (a, b, weightA) => (a * weightA) + b * (1 - weightA);
 
-    return p.color(
-      avg(totals.r, p.red(this.colour), config.colourBleedIntensity),
-      avg(totals.g, p.green(this.colour), config.colourBleedIntensity),
-      avg(totals.b, p.blue(this.colour), config.colourBleedIntensity),
-    );
+    return p.lerpColor(this.colour, neighbourColor, config.colourBleedIntensity);
+
+    // return p.color(
+    //   avg(totals.r, p.red(this.colour), config.colourBleedIntensity),
+    //   avg(totals.g, p.green(this.colour), config.colourBleedIntensity),
+    //   avg(totals.b, p.blue(this.colour), config.colourBleedIntensity),
+    // );
   };
 
   step = (p, balls, config) => {
-    const neighbours = this.getNeighbours(balls);
+    const neighbours = this.getNeighbours(balls, config);
 
     const deflectX = () => {
       if (this.pos.x + this.radius > this.maxX || this.pos.x < this.radius) {
