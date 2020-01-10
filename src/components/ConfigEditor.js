@@ -21,7 +21,7 @@ export class ConfigEditor
       return;
     }
 
-    const onChange = val => this.props.actions.changeAttribute({key, value: val});
+    const onChange = (val) => this.props.actions.changeAttribute({key, value: val});
 
     switch (typeof element) {
       default:
@@ -34,13 +34,17 @@ export class ConfigEditor
             placeholder={key}
             style={{maxWidth: '80px'}}
             onChange={onChange}
+            step={Number.isInteger(element)? 1 : 0.1} // I know..
+            min={0} max={Number.isInteger(element)? 100 : 1}
           />;
         else
-          return <Input
+          return <Slider
             value={element}
             placeholder={key}
-            style={{maxWidth: '80px'}}
+            style={{minWidth: '80px'}}
             onChange={onChange}
+            step={Number.isInteger(element)? 1 : 0.1} // I know..
+            min={0.1} max={Number.isInteger(element)? 100 : 0.9}
           />;
       case 'boolean':
         return <Switch
