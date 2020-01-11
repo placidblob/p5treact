@@ -1,8 +1,5 @@
 import * as params from './params';
-import {theFlock} from './flock'
 import * as p5 from 'p5';
-
-const dish = require('../constants/dish');
 
 export class Ball {
 
@@ -44,132 +41,134 @@ export class Ball {
   };
 
   step = (p, balls, config) => {
-    const getAttractiveForce = () => {
-      const rtrn = p.createVector();
+    const quanta = {
+      getAttractiveForce: () => {
+        const rtrn = p.createVector();
 
-      balls.forEach(b => {
-        const force = p.createVector(b.pos.x - this.pos.x, b.pos.y - this.pos.y);
+        balls.forEach(b => {
+          const force = p.createVector(b.pos.x - this.pos.x, b.pos.y - this.pos.y);
 
-        const distSq = distanceSq(b);
+          const distSq = quanta.distanceSq(b);
 
-        force.setMag((distSq - params.COZY_DISTANCE_SQ) / params.COZY_DISTANCE_SQ );
+          force.setMag((distSq - config.cozy_distance**2) / config.cozy_distance**2);
 
-        rtrn.add(force);
-      });
+          rtrn.add(force);
+        });
 
-      rtrn.setMag(params.ATTRACTIVE_FORCE);
+        rtrn.setMag(config.attractionAmount);
 
-      return rtrn;
-    };
+        return rtrn;
+      },
 
-    const getRepulsiveForce = () => {
-      const rtrn = p.createVector();
+      getRepulsiveForce: () => {
+        const rtrn = p.createVector();
 
-      balls.forEach(b => {
-        const force = p.createVector(b.pos.x - this.pos.x, b.pos.y - this.pos.y);
+        balls.forEach(b => {
+          const force = p.createVector(b.pos.x - this.pos.x, b.pos.y - this.pos.y);
 
-        const distSq = distanceSq(b);
+          const distSq = quanta.distanceSq(b);
 
-        if(distSq >= params.COZY_DISTANCE_SQ)
-          return;
+          if (distSq >= config.cozy_distance**2)
+            return;
 
-        force.setMag((params.COZY_DISTANCE_SQ - distSq) / params.COZY_DISTANCE_SQ);
+          force.setMag((config.cozy_distance**2 - distSq) / config.cozy_distance**2);
 
-        rtrn.add(force);
-      });
+          rtrn.add(force);
+        });
 
-      rtrn.setMag(params.ATTRACTIVE_FORCE);
+        rtrn.setMag(config.repulsionAmount);
 
-      return rtrn;
-    };
+        return rtrn;
+      },
 
-    const getNeighbours = () => {
-      const rtrn = [];
+      getNeighbours: () => {
+        const rtrn = [];
 
-      for( let ball of balls )
-        if( distanceSq(ball) < config.line_of_sight )
-          rtrn.push(ball);
+        for (let ball of balls)
+          if (quanta.distanceSq(ball) < config.line_of_sight **2)
+            rtrn.push(ball);
 
-      return rtrn;
-    };
+        return rtrn;
+      },
 
-    const distanceSq = (ball) => {
-      const diffx = this.pos.x - ball.pos.x;
-      const diffy = this.pos.y - ball.pos.y;
+      distanceSq: (ball) => {
+        const diffx = this.pos.x - ball.pos.x;
+        const diffy = this.pos.y - ball.pos.y;
 
-      return diffx * diffx + diffy * diffy;
-    };
+        return diffx * diffx + diffy * diffy;
+      },
 
-    const deflectX = () => {
-      if (this.pos.x + this.radius > this.maxX || this.pos.x < this.radius) {
-        this.vel.x *= -1;
+      deflectX: () => {
+        if (this.pos.x + this.radius > this.maxX || this.pos.x < this.radius) {
+          this.vel.x *= -1;
 
-        this.pos.x = (this.pos.x < this.radius)? this.radius : this.maxX - this.radius;
+          this.pos.x = (this.pos.x < this.radius) ? this.radius : this.maxX - this.radius;
+        }
+      },
+
+      deflectY: () => {
+        if (this.pos.y + this.radius > this.maxY || this.pos.y < this.radius) {
+          this.vel.y *= -1;
+
+          this.pos.y = (this.pos.y < this.radius) ? this.radius : this.maxY - this.radius;
+        }
+      },
+
+      pacmanX: () => {
+        if (this.pos.x > this.maxX)
+          this.pos.x -= this.maxX;
+        else if (this.pos.x < 0)
+          this.pos.x += this.maxX;
+      },
+
+      pacmanY: () => {
+        if (this.pos.y > this.maxY)
+          this.pos.y -= this.maxY;
+        else if (this.pos.y < 0)
+          this.pos.y += this.maxY;
+      },
+
+      gravity: () => {
+        let g = p.createVector(0, config.gravityAmount);
+        this.vel.add(g);
+      },
+
+      friction: () => {
+        this.vel.mult(1 - config.frictionAmount / 10);
+      },
+
+      attraction: () => {
+        const attr = quanta.getAttractiveForce();
+
+        this.vel.add(attr);
+      },
+
+      repulsion: () => {
+        const attr = quanta.getRepulsiveForce();
+
+        this.vel.sub(attr);
+      },
+
+      limitVelocity: (limitTo) => {
+        if (this.vel.mag() > limitTo)
+          this.vel.setMag(limitTo);
       }
     };
 
-    const deflectY = () => {
-      if (this.pos.y + this.radius > this.maxY || this.pos.y < this.radius) {
-        this.vel.y *= -1;
+    const neighbours = quanta.getNeighbours(balls, config);
 
-        this.pos.y = (this.pos.y < this.radius)? this.radius : this.maxY - this.radius;
-      }
-    };
+    config.deflectX && quanta.deflectX();
+    config.deflectY && quanta.deflectY();
+    config.pacmanX && quanta.pacmanX();
+    config.pacmanY && quanta.pacmanY();
 
-    const pacmanX = () => {
-      if (this.pos.x > this.maxX)
-        this.pos.x -= this.maxX;
-      else if (this.pos.x < 0)
-        this.pos.x += this.maxX;
-    };
+    config.gravity && quanta.gravity();
+    config.friction && quanta.friction();
 
-    const pacmanY = () => {
-      if (this.pos.y > this.maxY)
-        this.pos.y -= this.maxY;
-      else if (this.pos.y < 0)
-        this.pos.y += this.maxY;
-    };
+    config.attraction && quanta.attraction();
+    config.repulsion && quanta.repulsion();
 
-    const gravity = () => {
-      let g = p.createVector(0, params.GRAVITY);
-      this.vel.add(g);
-    };
-
-    const friction = () => {
-      this.vel.mult(1-params.FRICTION);
-    };
-
-    const attraction = () => {
-      const attr = getAttractiveForce();
-
-      this.vel.add(attr);
-    };
-
-    const repulsion = () => {
-      const attr = getRepulsiveForce();
-
-      this.vel.sub(attr);
-    };
-
-    const limitVelocity = (limitTo) => {
-      if( this.vel.mag() > limitTo )
-        this.vel.setMag(limitTo);
-    };
-
-    const neighbours = getNeighbours(balls, config);
-
-    config.deflectX && deflectX();
-    config.deflectY && deflectY();
-    config.pacmanX && pacmanX();
-    config.pacmanY && pacmanY();
-
-    config.gravity && gravity();
-    config.friction && friction();
-
-    config.attraction && attraction();
-    config.repulsion && repulsion();
-
-    config.limitVelocity && limitVelocity(config.velocity? config.velocity : params.MAX_VELOCITY);
+    config.limitVelocity && quanta.limitVelocity(config.velocity? config.velocity : params.MAX_VELOCITY);
 
     this.pos.add(this.vel);
 

@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from "prop-types";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
-import {Card, Input, InputNumber, Switch, Slider} from 'antd';
+import {Card, InputNumber, Slider, Switch} from 'antd';
+import * as _ from 'lodash';
 
 import {combine} from '../utils'
 import * as p5triActions from "../actions/p5triActions";
 import * as uiActions from "../actions/uiActions";
-const actions = combine(p5triActions, uiActions);
 
-import * as _ from 'lodash';
+const actions = combine(p5triActions, uiActions);
 
 export class ConfigEditor
   extends React.Component {

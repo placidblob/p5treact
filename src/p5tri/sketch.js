@@ -18,4 +18,12 @@ export const sketch = (p) => {
   };
 
   p.draw = () => props && props.isRunning && theFlock.draw(p, props.behaviour);
+
+/*
+  p.mouseClicked = () => {
+    theFlock.addBall(p);
+    // prevent default
+    return false;
+  }
+*/
 };

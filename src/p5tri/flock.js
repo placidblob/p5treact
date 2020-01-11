@@ -2,7 +2,6 @@ import * as staticParams from './params';
 import {Ball} from './ball';
 
 let zeBalls = [];
-let tick = 0;
 
 export class Flock {
   tick = 0;
@@ -22,6 +21,8 @@ export class Flock {
       zeBalls.push(new Ball(staticParams.MAX_X, staticParams.MAX_Y, p));
   };
 
+  addBall = (p) => zeBalls.push(new Ball(staticParams.MAX_X, staticParams.MAX_Y, p));
+
   // TODO: animated gif stuff - https://gist.github.com/antiboredom/129fd2311dec0046603e
 
   draw = (p, behaviour) => {
@@ -29,8 +30,6 @@ export class Flock {
       console.error('Flock: no p5 or no behaviour:', p, behaviour);
       return;
     }
-
-    tick++;
 
     p.background(51);
 

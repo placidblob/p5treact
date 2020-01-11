@@ -1,6 +1,6 @@
 [
   {
-    "title": "Particles",
+    "title": "particles",
     "description": "",
     "behaviour": {
       "deflectX": true,
@@ -8,10 +8,10 @@
       "pacmanX": true,
       "pacmanY": true,
 
-      "gravity": true,
+      "gravity": false,
       "friction": true,
 
-      "attraction": true,
+      "attraction": false,
       "repulsion": true,
 
       "limitVelocity": true,
@@ -20,10 +20,16 @@
       "colourBleed" : true,
       "colourBleedIntensity": 0.5,
 
-      "line_of_sight": 10000
+      "line_of_sight": 190,
+
+      "cozy_distance": 96,
+      "gravityAmount": 2,
+      "attractionAmount": 2,
+      "repulsionAmount": 2,
+      "frictionAmount": 0.004
     }
   }, {
-    "title": "Gassy",
+    "title": "gassy",
     "description": "",
     "behaviour": {
       "deflectX": true,
@@ -43,10 +49,16 @@
       "colourBleed" : true,
       "colourBleedIntensity": 0.5,
 
-      "line_of_sight": 10000
+      "line_of_sight": 95,
+
+      "cozy_distance": 96,
+      "gravityAmount": 2,
+      "attractionAmount": 2,
+      "repulsionAmount": 2,
+      "frictionAmount": 0.004
     }
   }, {
-    "title": "Efervescent",
+    "title": "efervescent",
     "description": "ends up looking like gas molecules escaping a liquid",
     "behaviour": {
       "deflectX": true,
@@ -66,10 +78,16 @@
       "colourBleed" : true,
       "colourBleedIntensity": 0.5,
 
-      "line_of_sight": 10000
+      "line_of_sight": 95,
+
+      "cozy_distance": 96,
+      "gravityAmount": 2,
+      "attractionAmount": 2,
+      "repulsionAmount": 2,
+      "frictionAmount": 0.004
     }
   }, {
-    "title": "Stream",
+    "title": "stream",
     "description": "they self-organise to act as a stream",
     "behaviour": {
       "deflectX": true,
@@ -89,7 +107,13 @@
       "colourBleed": false,
       "colourBleedIntensity": 0.5,
 
-      "line_of_sight": 10000
+      "line_of_sight": 95,
+
+      "cozy_distance": 96,
+      "gravityAmount": 2,
+      "attractionAmount": 2,
+      "repulsionAmount": 2,
+      "frictionAmount": 0.004
     }
   }, {
     "title": "blob",
@@ -112,7 +136,13 @@
       "colourBleed": false,
       "colourBleedIntensity": 0.5,
 
-      "line_of_sight": 10000
+      "line_of_sight": 95,
+
+      "cozy_distance": 96,
+      "gravityAmount": 2,
+      "attractionAmount": 2,
+      "repulsionAmount": 2,
+      "frictionAmount": 0.004
     }
   }, {
     "title": "sandbox",
@@ -135,7 +165,13 @@
       "colourBleed": true,
       "colourBleedIntensity": 0.7,
 
-      "line_of_sight": 10000
+      "line_of_sight": 95,
+
+      "cozy_distance": 96,
+      "gravityAmount": 2,
+      "attractionAmount": 2,
+      "repulsionAmount": 2,
+      "frictionAmount": 0.004
     }
   }
 ]

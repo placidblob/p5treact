@@ -5,6 +5,8 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import path from 'path';
 
+const AntdScssThemePlugin = require('antd-scss-theme-plugin');
+
 const GLOBALS = {
   'process.env.NODE_ENV': JSON.stringify('production'),
   __DEV__: false
@@ -57,15 +59,20 @@ export default {
       // To track JavaScript errors via TrackJS, sign up for a free trial at TrackJS.com and enter your token below.
       trackJSToken: ''
     }),
-
+    new AntdScssThemePlugin('./ant-theme.scss')
   ],
   module: {
     rules: [
-      {
-        test: /\.jsx?$/,
+      { test: /src(\/|\\)(.+)\.js$/,
+        loader: 'babel-loader',
         exclude: /node_modules/,
-        use: ['babel-loader']
-      },
+        options: {
+          cacheDirectory: true,
+          plugins: [
+            'react-hot-loader/babel',
+            ['import', { libraryName: "antd", style: true }]
+          ]
+        }},
       {
         test: /\.eot(\?v=\d+.\d+.\d+)?$/,
         use: [
@@ -154,6 +161,19 @@ export default {
               sourceMap: true
             }
           }
+        ]
+      },
+      {
+        test: /\.less$/,
+        use: [
+          {loader: "style-loader"},
+          {loader: "css-loader"},
+          AntdScssThemePlugin.themify({loader: "less-loader",
+            options: {
+              javascriptEnabled: true,
+              modules: false
+            }
+          })
         ]
       }
     ]

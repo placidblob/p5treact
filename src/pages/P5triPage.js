@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import {combine} from '../utils'
-import * as _ from 'lodash';
 
 import * as p5triActions from "../actions/p5triActions";
 import * as uiActions from "../actions/uiActions";
