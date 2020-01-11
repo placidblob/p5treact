@@ -1,12 +1,12 @@
-import {theFlock} from './flock';
+import globals from './globals';
 
 export const sketch = (p) => {
-  let props = undefined; // see p5triParams in initialState.js for format
+  globals.p = p;
 
   p.setup = () => {
     console.log('$$$ SKETCH.SETUP()');
 
-    theFlock.setup(p);
+    globals.flock.setup(p, globals.props, true);
   };
 
   p.myCustomRedrawAccordingToNewPropsHandler = (newParams) => {
@@ -14,16 +14,8 @@ export const sketch = (p) => {
 
     console.log('myCustomRedrawAccordingToNewPropsHandler', newParams.props);
 
-    props = newParams.props;
+    globals.props = newParams.props;
   };
 
-  p.draw = () => props && props.isRunning && theFlock.draw(p, props.behaviour);
-
-/*
-  p.mouseClicked = () => {
-    theFlock.addBall(p);
-    // prevent default
-    return false;
-  }
-*/
+  p.draw = () => globals.props && globals.props.isRunning && globals.flock.draw(p, globals.props.behaviour);
 };

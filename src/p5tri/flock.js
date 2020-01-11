@@ -1,27 +1,27 @@
-import * as staticParams from './params';
 import {Ball} from './ball';
+import globals from './globals';
 
-let zeBalls = [];
 
 export class Flock {
-  tick = 0;
 
-  setup = (p, initBalls = (zeBalls.length === 0)) => {
-    if (!p) return;
+  zeBalls = [];
 
-    p.createCanvas(staticParams.MAX_X, staticParams.MAX_Y);
+  setup = (p, props, initBalls = (this.zeBalls.length === 0)) => {
+    if (!p || !props) return;
+
+    p.createCanvas(props.dishConfig.width, props.dishConfig.height);
 
     if (initBalls)
-      this.initBalls(p);
+      this.initBalls(p, props);
   };
 
   initBalls = (p) => {
-    zeBalls = [];
-    while (zeBalls.length < staticParams.FLOCK_SIZE)
-      zeBalls.push(new Ball(staticParams.MAX_X, staticParams.MAX_Y, p));
+    this.zeBalls = [];
+    while (this.zeBalls.length < globals.props.dishConfig.flock_size)
+      this.zeBalls.push(new Ball(globals.props.dishConfig.width, globals.props.dishConfig.height, p, globals.props));
   };
 
-  addBall = (p) => zeBalls.push(new Ball(staticParams.MAX_X, staticParams.MAX_Y, p));
+  addBall = (p) => this.zeBalls.push(new Ball(globals.props.dishConfig.width, globals.props.dishConfig.height, p));
 
   // TODO: animated gif stuff - https://gist.github.com/antiboredom/129fd2311dec0046603e
 
@@ -33,9 +33,8 @@ export class Flock {
 
     p.background(51);
 
-    for( let b of zeBalls )
-      b.step(p, zeBalls, behaviour);
+    for( let b of this.zeBalls )
+      b.step(p, this.zeBalls, behaviour);
   }
 }
 
-export const theFlock = new Flock();

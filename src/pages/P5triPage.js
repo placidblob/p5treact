@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Radio, Tag} from 'antd';
+import {Button, Radio, Tag, Tabs} from 'antd';
 import PropTypes from "prop-types";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
@@ -9,6 +9,8 @@ import * as p5triActions from "../actions/p5triActions";
 import * as uiActions from "../actions/uiActions";
 import {P5triComponent} from "../components/P5triComponent";
 import {ConfigEditor} from "../components/ConfigEditor";
+
+const { TabPane } = Tabs;
 
 const actions = combine(p5triActions, uiActions);
 
@@ -56,7 +58,7 @@ export class P5triPage
 
             <span
               className={'flexRow'}
-              style={{justifyContent: 'space-between', alignItems: 'top'}}
+              style={{justifyContent: 'space-between', alignItems: 'flex-start'}}
             >
               <span style={{alignSelf: 'flex-start', marginTop: '5px'}}>
                 <P5triComponent
@@ -64,11 +66,32 @@ export class P5triPage
                 />
               </span>
 
-              <ConfigEditor
-                config={this.props.p5triParams.behaviour}
-                // TODO?
-                actions={this.props.actions}
-              />
+              <Tabs
+                defaultActiveKey="1"
+                onChange={c => console.log('tabs says', c)}
+                size={'small'}
+                style={{width: '100%', maxWidth: '400px'}}
+              >
+                <TabPane tab="behaviour" key="1">
+                  <ConfigEditor
+                    config={this.props.p5triParams.behaviour}
+                    parentKey={'behaviour'}
+                    actions={this.props.actions}
+                    title={this.props.p5triParams.behaviour.title}
+                  />
+                </TabPane>
+                <TabPane tab="world" key="2">
+                  <ConfigEditor
+                    config={this.props.p5triParams.dishConfig}
+                    parentKey={'dishConfig'}
+                    actions={this.props.actions}
+                    title={this.props.p5triParams.dishConfig.title}
+                  />
+                  <Button onClick={this.props.actions.reset}>
+                    reset!
+                  </Button>
+                </TabPane>
+              </Tabs>
             </span>
 
             <Button

@@ -21,7 +21,11 @@ export class ConfigEditor
       return;
     }
 
-    const onChange = (val) => this.props.actions.changeAttribute({key, value: val});
+    const onChange = (val) => this.props.actions.changeAttribute({
+      key: key,
+      parentKey: this.props.parentKey,
+      value: val
+    });
 
     switch (typeof element) {
       default:
@@ -97,7 +101,7 @@ ConfigEditor.propTypes = {
   actions: PropTypes.object.isRequired, // TODO?
   title: PropTypes.string,
   indent: PropTypes.number,
-  parentKeys: PropTypes.arrayOf(PropTypes.string),
+  parentKey: PropTypes.string,
 };
 
 

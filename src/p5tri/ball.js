@@ -1,9 +1,8 @@
-import * as params from './params';
 import * as p5 from 'p5';
 
 export class Ball {
 
-  constructor( maxX , maxY, p ) {
+  constructor( maxX , maxY, p, props ) {
     this.pos = p.createVector(p.random(0,maxX), p.random(0,maxY));
     this.vel = p5.Vector.random2D();
 
@@ -14,31 +13,8 @@ export class Ball {
 
     this.colour = p.color(p.random(0,255), p.random(0,255), p.random(0,255));
 
-    this.radius = params.BALL_RADIUS;
-    // this.radius = random(0.75*BALL_RADIUS, 1.25*BALL_RADIUS);
+    this.radius = props.dishConfig.ball_radius;
   }
-
-  getColour = (p, neighbours, config) => {
-    if(!config || !config.colourBleed)
-      return this.colour;
-
-    const totals = { r: 0, g: 0, b:0, count:0 };
-
-    for( let n of neighbours) {
-      totals.count++;
-      totals.r += p.red(n.colour);
-      totals.g += p.green(n.colour);
-      totals.b += p.blue(n.colour);
-    }
-
-    const neighbourColor = p.color(
-      totals.r / totals.count,
-      totals.g / totals.count,
-      totals.b / totals.count
-    );
-
-    return p.lerpColor(this.colour, neighbourColor, config.colourBleedIntensity);
-  };
 
   step = (p, balls, config) => {
     const quanta = {
@@ -176,10 +152,30 @@ export class Ball {
   };
 
   show = (p, neighbours, config) => {
-    p.push();
+    const getColour = () => {
+      if(!config || !config.colourBleed)
+        return this.colour;
+
+      const totals = { r: 0, g: 0, b:0, count:0 };
+
+      for( let n of neighbours) {
+        totals.count++;
+        totals.r += p.red(n.colour);
+        totals.g += p.green(n.colour);
+        totals.b += p.blue(n.colour);
+      }
+
+      const neighbourColor = p.color(
+        totals.r / totals.count,
+        totals.g / totals.count,
+        totals.b / totals.count
+      );
+
+      return p.lerpColor(this.colour, neighbourColor, config.colourBleedIntensity || 0);
+    };
+
     p.strokeWeight(this.radius * 2);
-    p.stroke(this.getColour(p, neighbours, config));
+    p.stroke(getColour());
     p.point(this.pos.x, this.pos.y);
-    p.pop();
   };
 }

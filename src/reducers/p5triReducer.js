@@ -1,16 +1,31 @@
 import * as types from '../constants/actionTypes';
 import initialState from './initialState';
 import {combine} from '../utils'
+import globals from '../p5tri/globals'
 
 const reducerMap = {
   [types.PLAY_PAUSE]: (prevState) => ({isRunning: !prevState.isRunning}),
+  [types.RESET_SIMULATION]: () => { globals.p.setup(); return {}; },
   [types.SELECT_BEHAVIOUR]: (prevState, action) => action.payload,
-  [types.CHANGE_ATTRIBUTE]: (prevState, action) => ({
-    behaviour: {
-      ...prevState.behaviour,
-      [action.payload.key]: action.payload.value
-    }
-  }),
+  [types.CHANGE_ATTRIBUTE]: (prevState, action) => {
+    const {key, parentKey, value} = action.payload;
+
+    console.log('^^^ change_attr params', action, key, parentKey, value);
+
+    if(!parentKey)
+      return { [key]: value };
+
+    const rtrn = {
+      [parentKey]: {
+        ...prevState[parentKey],
+        [action.payload.key]: action.payload.value
+      }
+    };
+
+    console.log('change_attr returning', rtrn);
+
+    return rtrn;
+  },
 };
 
 
@@ -24,9 +39,12 @@ export default function p5triReducer(prevState = initialState.p5triParams, actio
 
     console.log('+++ handling action:', action);
     console.log('+   prev state:', prevState);
-    console.log('+-- reducer returning', combine(prevState, reducerMap[action.type](prevState, action)));
 
-    return combine(prevState, reducerMap[action.type](prevState, action));
+    const rtrn = combine(prevState, reducerMap[action.type](prevState, action));
+
+    console.log('+-- reducer returning', rtrn);
+
+    return rtrn;
   }
 
   return prevState;
