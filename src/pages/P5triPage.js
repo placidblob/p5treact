@@ -12,7 +12,7 @@ import {ConfigEditor} from "../components/ConfigEditor";
 
 const actions = combine(p5triActions, uiActions);
 
-const dish = require('../constants/dish.json');
+const behaviours = require('../constants/behaviours.json');
 
 export class P5triPage
     extends React.Component {
@@ -32,7 +32,7 @@ export class P5triPage
   renderBehaviourSelector =  () => <span style={{ marginTop: 16 }}>
     <Radio.Group onChange={e => this.props.actions.selectBehaviour({behaviour: e.target.value})}>
       {
-        dish.map((config, index) =>
+        behaviours.map((config, index) =>
           <Radio.Button
             value={config.behaviour}
             key={index}

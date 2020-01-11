@@ -1,0 +1,17 @@
+[
+  {
+    "title": "default",
+    "description": "",
+    "flock_size": 128,
+    "width": 1400,
+    "height": 800,
+    "ball_radius": 12
+  }, {
+    "title": "crowded",
+    "description": "",
+    "flock_size": 256,
+    "width": 1400,
+    "height": 800,
+    "ball_radius": 14
+  }
+]

@@ -168,7 +168,7 @@ export class Ball {
     config.attraction && quanta.attraction();
     config.repulsion && quanta.repulsion();
 
-    config.limitVelocity && quanta.limitVelocity(config.velocity? config.velocity : params.MAX_VELOCITY);
+    config.limitVelocity && quanta.limitVelocity(config.velocity);
 
     this.pos.add(this.vel);
 

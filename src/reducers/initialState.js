@@ -1,10 +1,12 @@
-import dish from '../constants/dish';
+import behaviours from '../constants/behaviours';
+import dishConfigs from '../constants/dishConfigs';
 import * as _ from 'lodash';
 
 export default {
   p5triParams: {
     isRunning: true,
-    behaviour: _.first(dish).behaviour
+    behaviour: _.first(behaviours).behaviour,
+    dishConfig: _.first(dishConfigs),
   },
   ui: {
     showMainSlider: true
