@@ -188,7 +188,7 @@ export class Ball {
     let diameter = this.radius * 2;
     const colour = getColour();
 
-    for(let i = this.tail.length - 1; i >= 0; i--) {
+    for(let i = this.tail.length - 1; i >= 0 && diameter > 0; i--) {
       p.strokeWeight(diameter);
       p.stroke(colour);
       p.point(this.tail[i].x, this.tail[i].y);
