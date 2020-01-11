@@ -1,6 +1,6 @@
 [
   {
-    "title": "particles",
+    "title": "tadpoles",
     "description": "",
 
     "deflectX": true,
@@ -15,15 +15,18 @@
     "repulsion": true,
 
     "limitVelocity": true,
-    "velocity": 4,
+    "velocity": 6,
 
     "colourBleed" : true,
     "colourBleedIntensity": 0.5,
 
-    "line_of_sight": 190,
-    "tailLength": 10,
+    "lineOfSight": 190,
+    "tailLength": 12,
+    "tailFactor": 0.97,
+    "tailSkip": 2,
+    "ballRadius": 16,
 
-    "cozy_distance": 96,
+    "cozyDistance": 96,
     "gravityAmount": 2,
     "attractionAmount": 2,
     "repulsionAmount": 2,
@@ -49,10 +52,13 @@
     "colourBleed" : true,
     "colourBleedIntensity": 0.5,
 
-    "line_of_sight": 95,
+    "lineOfSight": 95,
     "tailLength": 4,
+    "tailFactor": 0.95,
+    "tailSkip": 1,
+    "ballRadius": 12,
 
-    "cozy_distance": 96,
+    "cozyDistance": 96,
     "gravityAmount": 2,
     "attractionAmount": 2,
     "repulsionAmount": 2,
@@ -78,10 +84,13 @@
     "colourBleed" : true,
     "colourBleedIntensity": 0.5,
 
-    "line_of_sight": 95,
+    "lineOfSight": 95,
     "tailLength": 4,
+    "tailFactor": 0.95,
+    "tailSkip": 1,
+    "ballRadius": 12,
 
-    "cozy_distance": 96,
+    "cozyDistance": 96,
     "gravityAmount": 2,
     "attractionAmount": 2,
     "repulsionAmount": 2,
@@ -107,10 +116,13 @@
     "colourBleed": false,
     "colourBleedIntensity": 0.5,
 
-    "line_of_sight": 95,
+    "lineOfSight": 95,
     "tailLength": 4,
+    "tailFactor": 0.95,
+    "tailSkip": 1,
+    "ballRadius": 12,
 
-    "cozy_distance": 96,
+    "cozyDistance": 96,
     "gravityAmount": 2,
     "attractionAmount": 2,
     "repulsionAmount": 2,
@@ -136,38 +148,13 @@
     "colourBleed": false,
     "colourBleedIntensity": 0.5,
 
-    "line_of_sight": 95,
+    "lineOfSight": 95,
     "tailLength": 4,
+    "tailFactor": 0.95,
+    "tailSkip": 1,
+    "ballRadius": 12,
 
-    "cozy_distance": 96,
-    "gravityAmount": 2,
-    "attractionAmount": 2,
-    "repulsionAmount": 2,
-    "frictionAmount": 0.004
-  }, {
-    "title": "sandbox",
-    "description": "",
-    "deflectX": false,
-    "deflectY": false,
-    "pacmanX": true,
-    "pacmanY": true,
-
-    "gravity": false,
-    "friction": true,
-
-    "attraction": true,
-    "repulsion": true,
-
-    "limitVelocity": true,
-    "velocity": 2,
-
-    "colourBleed": true,
-    "colourBleedIntensity": 0.7,
-
-    "line_of_sight": 95,
-    "tailLength": 4,
-
-    "cozy_distance": 96,
+    "cozyDistance": 96,
     "gravityAmount": 2,
     "attractionAmount": 2,
     "repulsionAmount": 2,

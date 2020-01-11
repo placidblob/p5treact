@@ -21,11 +21,11 @@ export class Ball {
   updateTail = (config) => {
     this.tail.push({...this.pos});
 
-    while(this.tail.length > config.tailLength)
+    while(this.tail.length > config.tailLength * config.tailSkip)
       this.tail.shift();
   };
 
-  step = (p, balls, config) => {
+  step = (p, balls, config, tick) => {
     const quanta = {
       getAttractiveForce: () => {
         const rtrn = p.createVector();
@@ -35,7 +35,7 @@ export class Ball {
 
           const distSq = quanta.distanceSq(b);
 
-          force.setMag((distSq - config.cozy_distance**2) / config.cozy_distance**2);
+          force.setMag((distSq - config.cozyDistance**2) / config.cozyDistance**2);
 
           rtrn.add(force);
         });
@@ -53,10 +53,10 @@ export class Ball {
 
           const distSq = quanta.distanceSq(b);
 
-          if (distSq >= config.cozy_distance**2)
+          if (distSq >= config.cozyDistance**2)
             return;
 
-          force.setMag((config.cozy_distance**2 - distSq) / config.cozy_distance**2);
+          force.setMag((config.cozyDistance**2 - distSq) / config.cozyDistance**2);
 
           rtrn.add(force);
         });
@@ -70,7 +70,7 @@ export class Ball {
         const rtrn = [];
 
         for (let ball of balls)
-          if (quanta.distanceSq(ball) < config.line_of_sight **2)
+          if (quanta.distanceSq(ball) < config.lineOfSight **2)
             rtrn.push(ball);
 
         return rtrn;
@@ -159,7 +159,7 @@ export class Ball {
 
     this.updateTail(config);
 
-    this.show(p, neighbours, config);
+    this.show(p, neighbours, config, tick);
   };
 
   show = (p, neighbours, config) => {
@@ -185,16 +185,19 @@ export class Ball {
       return p.lerpColor(this.colour, neighbourColor, config.colourBleedIntensity || 0);
     };
 
-    let diameter = this.radius * 2;
+    let diameter = config.ballRadius * 2;
     const colour = getColour();
     let multiplier = 1;
+    let cnt = 0;
 
     for(let i = this.tail.length - 1; i >= 0 && diameter > 0; i--) {
+      if(cnt++ % config.tailSkip !== 0) continue;
+
       p.strokeWeight(diameter);
-      p.stroke(p.red(colour), p.green(colour), p.blue(colour), multiplier * 100);
+      p.stroke(p.red(colour), p.green(colour), p.blue(colour), multiplier === 1? 190 : multiplier * 128);
       p.point(this.tail[i].x, this.tail[i].y);
 
-      multiplier *= 0.95;
+      multiplier *= config.tailFactor;
       diameter = Math.floor(diameter * multiplier);
     }
   };
