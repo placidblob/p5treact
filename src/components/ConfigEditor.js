@@ -82,14 +82,14 @@ export class ConfigEditor
               {this.renderElement(this.props.config[k], k)}
             </span>;
 
-          return <ConfigEditor
-            key={k}
-            title={k}
-            config={this.props.config[k]}
-            indent={this.props.indent? this.props.indent + 1 : 1}
-            parentKeys={this.props.parentKeys? _.union(this.props.parentKeys, [k]) : [k]}
-            actions={this.props.actions}
-          />;
+          // return <ConfigEditor
+          //   key={k}
+          //   title={k}
+          //   config={this.props.config[k]}
+          //   indent={this.props.indent? this.props.indent + 1 : 1}
+          //   parentKeys={this.props.parentKeys? _.union(this.props.parentKeys, [k]) : [k]}
+          //   actions={this.props.actions}
+          // />;
         })
       }
     </Card>

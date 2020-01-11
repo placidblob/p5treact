@@ -187,12 +187,15 @@ export class Ball {
 
     let diameter = this.radius * 2;
     const colour = getColour();
+    let multiplier = 1;
 
     for(let i = this.tail.length - 1; i >= 0 && diameter > 0; i--) {
       p.strokeWeight(diameter);
-      p.stroke(colour);
+      p.stroke(p.red(colour), p.green(colour), p.blue(colour), multiplier * 100);
       p.point(this.tail[i].x, this.tail[i].y);
-      diameter = Math.floor(diameter * 0.85);
+
+      multiplier *= 0.95;
+      diameter = Math.floor(diameter * multiplier);
     }
   };
 }
