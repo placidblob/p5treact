@@ -5,6 +5,7 @@ import globals from './globals';
 export class Flock {
 
   zeBalls = [];
+  tick = 0;
 
   setup = (p, props, initBalls = (this.zeBalls.length === 0)) => {
     if (!p || !props) return;
@@ -30,6 +31,8 @@ export class Flock {
       console.error('Flock: no p5 or no behaviour:', p, behaviour);
       return;
     }
+
+    this.tick++;
 
     p.background(51);
 

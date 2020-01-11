@@ -14,7 +14,16 @@ export class Ball {
     this.colour = p.color(p.random(0,255), p.random(0,255), p.random(0,255));
 
     this.radius = props.dishConfig.ball_radius;
+
+    this.tail = [this.pos];
   }
+
+  updateTail = (config) => {
+    this.tail.push({...this.pos});
+
+    while(this.tail.length > config.tailLength)
+      this.tail.shift();
+  };
 
   step = (p, balls, config) => {
     const quanta = {
@@ -148,6 +157,8 @@ export class Ball {
 
     this.pos.add(this.vel);
 
+    this.updateTail(config);
+
     this.show(p, neighbours, config);
   };
 
@@ -174,8 +185,14 @@ export class Ball {
       return p.lerpColor(this.colour, neighbourColor, config.colourBleedIntensity || 0);
     };
 
-    p.strokeWeight(this.radius * 2);
-    p.stroke(getColour());
-    p.point(this.pos.x, this.pos.y);
+    let diameter = this.radius * 2;
+    const colour = getColour();
+
+    for(let i = this.tail.length - 1; i >= 0; i--) {
+      p.strokeWeight(diameter);
+      p.stroke(colour);
+      p.point(this.tail[i].x, this.tail[i].y);
+      diameter = Math.floor(diameter * 0.85);
+    }
   };
 }

@@ -21,6 +21,7 @@
     "colourBleedIntensity": 0.5,
 
     "line_of_sight": 190,
+    "tailLength": 10,
 
     "cozy_distance": 96,
     "gravityAmount": 2,
@@ -49,6 +50,7 @@
     "colourBleedIntensity": 0.5,
 
     "line_of_sight": 95,
+    "tailLength": 4,
 
     "cozy_distance": 96,
     "gravityAmount": 2,
@@ -77,6 +79,7 @@
     "colourBleedIntensity": 0.5,
 
     "line_of_sight": 95,
+    "tailLength": 4,
 
     "cozy_distance": 96,
     "gravityAmount": 2,
@@ -105,6 +108,7 @@
     "colourBleedIntensity": 0.5,
 
     "line_of_sight": 95,
+    "tailLength": 4,
 
     "cozy_distance": 96,
     "gravityAmount": 2,
@@ -133,6 +137,7 @@
     "colourBleedIntensity": 0.5,
 
     "line_of_sight": 95,
+    "tailLength": 4,
 
     "cozy_distance": 96,
     "gravityAmount": 2,
@@ -160,6 +165,7 @@
     "colourBleedIntensity": 0.7,
 
     "line_of_sight": 95,
+    "tailLength": 4,
 
     "cozy_distance": 96,
     "gravityAmount": 2,
