@@ -149,9 +149,9 @@
     "colourBleedIntensity": 0.5,
 
     "lineOfSight": 95,
-    "tailLength": 4,
+    "tailLength": 12,
     "tailFactor": 0.95,
-    "tailSkip": 1,
+    "tailSkip": 3,
     "ballRadius": 12,
 
     "cozyDistance": 96,
