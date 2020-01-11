@@ -5,7 +5,7 @@ import * as _ from 'lodash';
 export default {
   p5triParams: {
     isRunning: true,
-    behaviour: _.first(behaviours).behaviour,
+    behaviour: _.first(behaviours),
     dishConfig: _.first(dishConfigs),
   },
   ui: {

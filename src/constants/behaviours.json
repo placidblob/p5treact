@@ -2,176 +2,169 @@
   {
     "title": "particles",
     "description": "",
-    "behaviour": {
-      "deflectX": true,
-      "deflectY": true,
-      "pacmanX": true,
-      "pacmanY": true,
 
-      "gravity": false,
-      "friction": true,
+    "deflectX": true,
+    "deflectY": true,
+    "pacmanX": true,
+    "pacmanY": true,
 
-      "attraction": false,
-      "repulsion": true,
+    "gravity": false,
+    "friction": true,
 
-      "limitVelocity": true,
-      "velocity": 4,
+    "attraction": false,
+    "repulsion": true,
 
-      "colourBleed" : true,
-      "colourBleedIntensity": 0.5,
+    "limitVelocity": true,
+    "velocity": 4,
 
-      "line_of_sight": 190,
+    "colourBleed" : true,
+    "colourBleedIntensity": 0.5,
 
-      "cozy_distance": 96,
-      "gravityAmount": 2,
-      "attractionAmount": 2,
-      "repulsionAmount": 2,
-      "frictionAmount": 0.004
-    }
+    "line_of_sight": 190,
+
+    "cozy_distance": 96,
+    "gravityAmount": 2,
+    "attractionAmount": 2,
+    "repulsionAmount": 2,
+    "frictionAmount": 0.004
   }, {
     "title": "gassy",
     "description": "",
-    "behaviour": {
-      "deflectX": true,
-      "deflectY": true,
-      "pacmanX": false,
-      "pacmanY": false,
 
-      "gravity": false,
-      "friction": true,
+    "deflectX": true,
+    "deflectY": true,
+    "pacmanX": false,
+    "pacmanY": false,
 
-      "attraction": false,
-      "repulsion": true,
+    "gravity": false,
+    "friction": true,
 
-      "limitVelocity": true,
-      "velocity": 4,
+    "attraction": false,
+    "repulsion": true,
 
-      "colourBleed" : true,
-      "colourBleedIntensity": 0.5,
+    "limitVelocity": true,
+    "velocity": 4,
 
-      "line_of_sight": 95,
+    "colourBleed" : true,
+    "colourBleedIntensity": 0.5,
 
-      "cozy_distance": 96,
-      "gravityAmount": 2,
-      "attractionAmount": 2,
-      "repulsionAmount": 2,
-      "frictionAmount": 0.004
-    }
+    "line_of_sight": 95,
+
+    "cozy_distance": 96,
+    "gravityAmount": 2,
+    "attractionAmount": 2,
+    "repulsionAmount": 2,
+    "frictionAmount": 0.004
   }, {
     "title": "efervescent",
     "description": "ends up looking like gas molecules escaping a liquid",
-    "behaviour": {
-      "deflectX": true,
-      "deflectY": true,
-      "pacmanX": false,
-      "pacmanY": false,
 
-      "gravity": true,
-      "friction": true,
+    "deflectX": true,
+    "deflectY": true,
+    "pacmanX": false,
+    "pacmanY": false,
 
-      "attraction": false,
-      "repulsion": true,
+    "gravity": true,
+    "friction": true,
 
-      "limitVelocity": true,
-      "velocity": 4,
+    "attraction": false,
+    "repulsion": true,
 
-      "colourBleed" : true,
-      "colourBleedIntensity": 0.5,
+    "limitVelocity": true,
+    "velocity": 4,
 
-      "line_of_sight": 95,
+    "colourBleed" : true,
+    "colourBleedIntensity": 0.5,
 
-      "cozy_distance": 96,
-      "gravityAmount": 2,
-      "attractionAmount": 2,
-      "repulsionAmount": 2,
-      "frictionAmount": 0.004
-    }
+    "line_of_sight": 95,
+
+    "cozy_distance": 96,
+    "gravityAmount": 2,
+    "attractionAmount": 2,
+    "repulsionAmount": 2,
+    "frictionAmount": 0.004
   }, {
     "title": "stream",
     "description": "they self-organise to act as a stream",
-    "behaviour": {
-      "deflectX": true,
-      "deflectY": false,
-      "pacmanX": false,
-      "pacmanY": true,
 
-      "gravity": true,
-      "friction": true,
+    "deflectX": true,
+    "deflectY": false,
+    "pacmanX": false,
+    "pacmanY": true,
 
-      "attraction": true,
-      "repulsion": true,
+    "gravity": true,
+    "friction": true,
 
-      "limitVelocity": true,
-      "velocity": 4,
+    "attraction": true,
+    "repulsion": true,
 
-      "colourBleed": false,
-      "colourBleedIntensity": 0.5,
+    "limitVelocity": true,
+    "velocity": 4,
 
-      "line_of_sight": 95,
+    "colourBleed": false,
+    "colourBleedIntensity": 0.5,
 
-      "cozy_distance": 96,
-      "gravityAmount": 2,
-      "attractionAmount": 2,
-      "repulsionAmount": 2,
-      "frictionAmount": 0.004
-    }
+    "line_of_sight": 95,
+
+    "cozy_distance": 96,
+    "gravityAmount": 2,
+    "attractionAmount": 2,
+    "repulsionAmount": 2,
+    "frictionAmount": 0.004
   }, {
     "title": "blob",
     "description": "",
-    "behaviour": {
-      "deflectX": false,
-      "deflectY": false,
-      "pacmanX": true,
-      "pacmanY": true,
 
-      "gravity": false,
-      "friction": true,
+    "deflectX": false,
+    "deflectY": false,
+    "pacmanX": true,
+    "pacmanY": true,
 
-      "attraction": true,
-      "repulsion": true,
+    "gravity": false,
+    "friction": true,
 
-      "limitVelocity": true,
-      "velocity": 2,
+    "attraction": true,
+    "repulsion": true,
 
-      "colourBleed": false,
-      "colourBleedIntensity": 0.5,
+    "limitVelocity": true,
+    "velocity": 2,
 
-      "line_of_sight": 95,
+    "colourBleed": false,
+    "colourBleedIntensity": 0.5,
 
-      "cozy_distance": 96,
-      "gravityAmount": 2,
-      "attractionAmount": 2,
-      "repulsionAmount": 2,
-      "frictionAmount": 0.004
-    }
+    "line_of_sight": 95,
+
+    "cozy_distance": 96,
+    "gravityAmount": 2,
+    "attractionAmount": 2,
+    "repulsionAmount": 2,
+    "frictionAmount": 0.004
   }, {
     "title": "sandbox",
     "description": "",
-    "behaviour": {
-      "deflectX": false,
-      "deflectY": false,
-      "pacmanX": true,
-      "pacmanY": true,
+    "deflectX": false,
+    "deflectY": false,
+    "pacmanX": true,
+    "pacmanY": true,
 
-      "gravity": false,
-      "friction": true,
+    "gravity": false,
+    "friction": true,
 
-      "attraction": true,
-      "repulsion": true,
+    "attraction": true,
+    "repulsion": true,
 
-      "limitVelocity": true,
-      "velocity": 2,
+    "limitVelocity": true,
+    "velocity": 2,
 
-      "colourBleed": true,
-      "colourBleedIntensity": 0.7,
+    "colourBleed": true,
+    "colourBleedIntensity": 0.7,
 
-      "line_of_sight": 95,
+    "line_of_sight": 95,
 
-      "cozy_distance": 96,
-      "gravityAmount": 2,
-      "attractionAmount": 2,
-      "repulsionAmount": 2,
-      "frictionAmount": 0.004
-    }
+    "cozy_distance": 96,
+    "gravityAmount": 2,
+    "attractionAmount": 2,
+    "repulsionAmount": 2,
+    "frictionAmount": 0.004
   }
 ]

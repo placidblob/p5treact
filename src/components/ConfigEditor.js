@@ -41,7 +41,6 @@ export class ConfigEditor
             style={{maxWidth: '80px'}}
             onChange={onChange}
             step={Number.isInteger(element)? 1 : 0.1} // I know..
-            min={0} max={Number.isInteger(element)? 100 : 1}
           />;
         // else
         //   return <Slider

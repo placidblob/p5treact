@@ -32,12 +32,12 @@ export class P5triPage
   renderBehaviourSelector =  () => <span style={{ marginTop: 16 }}>
     <Radio.Group onChange={e => this.props.actions.selectBehaviour({behaviour: e.target.value})}>
       {
-        behaviours.map((config, index) =>
+        behaviours.map((behaviour, index) =>
           <Radio.Button
-            value={config.behaviour}
+            value={behaviour}
             key={index}
           >
-            {config.title}
+            {behaviour.title}
           </Radio.Button>
         )
       }
@@ -50,7 +50,26 @@ export class P5triPage
     return <>
         {
           this.props.p5triParams && <>
-            <h2>{this.props.p5triParams.isRunning ? 'GOGOGOGOGO' : 'STOPSTOPSTOP'}</h2>
+            {/*<h2>{this.props.p5triParams.isRunning ? 'GOGOGOGOGO' : 'STOPSTOPSTOP'}</h2>*/}
+
+            <h2>p5tri dish</h2>
+
+            <span
+              className={'flexRow'}
+              style={{justifyContent: 'space-between', alignItems: 'top'}}
+            >
+              <span style={{alignSelf: 'flex-start', marginTop: '5px'}}>
+                <P5triComponent
+                  p5triParams={this.props.p5triParams}
+                />
+              </span>
+
+              <ConfigEditor
+                config={this.props.p5triParams.behaviour}
+                // TODO?
+                actions={this.props.actions}
+              />
+            </span>
 
             <Button
               onClick={() => {
@@ -61,17 +80,6 @@ export class P5triPage
               {this.props.p5triParams.isRunning ? '-------' : `>>>>>`}
             </Button>
 
-            <span className={'flexRow'}>
-              <P5triComponent
-                p5triParams={this.props.p5triParams}
-              />
-
-              <ConfigEditor
-                config={this.props.p5triParams}
-                // TODO?
-                actions={this.props.actions}
-              />
-            </span>
             {this.renderBehaviourSelector()}
           </>
           || this.renderEmpty
