@@ -13,13 +13,13 @@
     "repulsion": true,
 
     "limitVelocity": true,
-    "velocity": 2,
+    "velocity": 3,
 
     "colourBleed": false,
     "colourBleedIntensity": 0.5,
 
     "tailLength": 12,
-    "tailModulo": 2,
+    "tailModulo": 1,
     "ballRadius": 12,
     "transparency": 130,
 
