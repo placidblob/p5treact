@@ -13,7 +13,7 @@ export class Ball {
 
     this.colour = p.color(p.random(0,255), p.random(0,255), p.random(0,255));
 
-    this.radius = props.dishConfig.ball_radius;
+    this.radius = props.dishConfig.ballRadius;
 
     this.tail = [this.pos];
   }
@@ -25,7 +25,7 @@ export class Ball {
       this.tail.shift();
   };
 
-  step = (p, balls, config, tick) => {
+  step = (p, behaviour, balls, tick) => {
     const quanta = {
       getAttractiveForce: (neighbouringBalls) => {
         const balz = neighbouringBalls || balls;
@@ -39,12 +39,12 @@ export class Ball {
 
           const distSq = quanta.distanceSq(b);
 
-          force.setMag((distSq - config.cozyDistance**2) / config.cozyDistance**2);
+          force.setMag((distSq - behaviour.cozyDistance_sq) / behaviour.cozyDistance_sq);
 
           rtrn.add(force);
         });
 
-        rtrn.setMag(config.attractionAmount);
+        rtrn.setMag(behaviour.attractionAmount);
 
         return rtrn;
       },
@@ -54,9 +54,9 @@ export class Ball {
 
         const rtrn = p.createVector();
 
-        balz.forEach(b => rtrn.add(quanta.getRepulsiveForceFrom(b.pos, config.cozyDistance**2)));
+        balz.forEach(b => b !== this && rtrn.add(quanta.getRepulsiveForceFrom(b.pos, behaviour.cozyDistance_sq)));
 
-        rtrn.setMag(config.repulsionAmount);
+        rtrn.setMag(behaviour.repulsionAmount);
 
         return rtrn;
       },
@@ -66,7 +66,7 @@ export class Ball {
 
         const distSq = quanta.distanceSqFromPoint(point);
 
-        if (distSq >= config.cozyDistance**2)
+        if (distSq >= behaviour.cozyDistance_sq)
           return;
 
         force.setMag((preferredDistanceSq - distSq) / preferredDistanceSq);
@@ -74,11 +74,11 @@ export class Ball {
         return force;
       },
 
-      getNeighbours: () => {
+      getNeighbours: (theNeighbours = balls) => {
         const rtrn = [];
 
-        for (let ball of balls)
-          if (ball !== this && quanta.distanceSq(ball) < config.lineOfSight **2)  // TODO: optimize by rectangle first?
+        for (let ball of theNeighbours)
+          if (ball !== this && quanta.distanceSq(ball) < behaviour.lineOfSight_sq)  // TODO: optimize by rectangle first?
             rtrn.push(ball);
 
         return rtrn;
@@ -88,12 +88,12 @@ export class Ball {
         const diffx = this.pos.x - point.x;
         const diffy = this.pos.y - point.y;
 
-        return diffx * diffx + diffy * diffy;
+        return diffx**2 + diffy**2;
       },
 
       distanceSq: (ball) => quanta.distanceSqFromPoint(ball.pos),
 
-      avoidMouse: () => this.vel.add(quanta.getRepulsiveForceFrom(p.createVector(p.mouseX, p.mouseY))),
+      avoidMouse: () => this.vel.add(quanta.getRepulsiveForceFrom(p.createVector(p.mouseX, p.mouseY)), behaviour.cozyDistance_sq),
 
       deflectX: () => {
         if (this.pos.x + this.radius > this.maxX || this.pos.x < this.radius) {
@@ -126,12 +126,12 @@ export class Ball {
       },
 
       gravity: () => {
-        let g = p.createVector(0, config.gravityAmount);
+        let g = p.createVector(0, behaviour.gravityAmount);
         this.vel.add(g);
       },
 
       friction: () => {
-        this.vel.mult(1 - config.frictionAmount / 10);
+        this.vel.mult(1 - behaviour.frictionAmount / 10);
       },
 
       attraction: () => {
@@ -147,34 +147,34 @@ export class Ball {
       },
 
       limitVelocity: () => {
-        if (this.vel.mag() > config.velocity)
-          this.vel.setMag(config.velocity);
+        if (this.vel.mag() > behaviour.velocity)
+          this.vel.setMag(behaviour.velocity);
       }
     };
 
     const neighbours = quanta.getNeighbours();
 
-    config.deflectX && quanta.deflectX();
-    config.deflectY && quanta.deflectY();
-    config.pacmanX && quanta.pacmanX();
-    config.pacmanY && quanta.pacmanY();
+    behaviour.deflectX && quanta.deflectX();
+    behaviour.deflectY && quanta.deflectY();
+    behaviour.pacmanX && quanta.pacmanX();
+    behaviour.pacmanY && quanta.pacmanY();
 
-    config.gravity && quanta.gravity();
-    config.friction && quanta.friction();
+    behaviour.gravity && quanta.gravity();
+    behaviour.friction && quanta.friction();
 
-    config.attraction && quanta.attraction();
-    config.repulsion && quanta.repulsion();
+    behaviour.attraction && quanta.attraction();
+    behaviour.repulsion && quanta.repulsion();
 
-    config.limitVelocity && quanta.limitVelocity();
+    behaviour.limitVelocity && quanta.limitVelocity();
 
     // TODO: make it work + put in params:
-    quanta.avoidMouse();
+    // quanta.avoidMouse();
 
     this.pos.add(this.vel);
 
-    this.updateTail(config);
+    this.updateTail(behaviour);
 
-    this.show(p, neighbours, config, tick);
+    this.show(p, neighbours, behaviour, tick);
   };
 
   show = (p, neighbours, config) => {

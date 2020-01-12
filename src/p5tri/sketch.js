@@ -1,12 +1,14 @@
 import globals from './globals';
 
-export const sketch = (p) => {
+export const sketch = (p, logicObject) => {
+  p.angleMode(p.DEGREES); // Change the mode to DEGREES
+
   globals.p = p;
 
   p.setup = () => {
     console.log('$$$ SKETCH.SETUP()');
 
-    globals.flock.setup(p, globals.props, true);
+    logicObject.setup(p, globals.props, true);
   };
 
   p.myCustomRedrawAccordingToNewPropsHandler = (newParams) => {
@@ -20,5 +22,5 @@ export const sketch = (p) => {
   p.draw = () =>
     globals.props &&
     globals.props.isRunning &&
-    globals.flock.draw(p, globals.props);
+    logicObject.draw(p, globals.props);
 };

@@ -37,7 +37,7 @@ export class Flock {
     p.background(51);
 
     for( let b of this.zeBalls )
-      b.step(p, this.zeBalls, behaviour, this.tick);
+      b.step(p, behaviour, this.zeBalls, this.tick);
 
 //    this.drawMousePoint(p);
   };

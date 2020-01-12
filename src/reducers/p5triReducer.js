@@ -28,19 +28,28 @@ const reducerMap = {
   },
 };
 
+export const calcSquares = (state) => ({
+  ...state,
+  behaviour: {
+    ...state.behaviour,
+    lineOfSight_sq: state.behaviour.lineOfSight ** 2,
+    cozyDistance_sq: state.behaviour.cozyDistance ** 2,
+  }
+});
+
 
 // IMPORTANT: Note that with Redux, state should NEVER be changed.
 // State is considered immutable. Instead,
 // create a copy of the state passed and set new values on the copy.
 // Note that I'm using Object.assign to create a copy of current state
 // and update values on the copy.
-export default function p5triReducer(prevState = initialState.p5triParams, action) {
+export default function p5triReducer(prevState = calcSquares(initialState.p5triParams), action) {
   if(reducerMap[action.type]) {
 
     console.log('+++ handling action:', action);
     console.log('+   prev state:', prevState);
 
-    const rtrn = combine(prevState, reducerMap[action.type](prevState, action));
+    const rtrn = calcSquares( combine(prevState, reducerMap[action.type](prevState, action)) );
 
     console.log('+-- reducer returning', rtrn);
 
