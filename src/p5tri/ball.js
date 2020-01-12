@@ -108,8 +108,8 @@ export class Ball {
 
     const neighbours = quanta.getNeighbours();
 
-    behaviour.deflectX && quanta.deflectX();
-    behaviour.deflectY && quanta.deflectY();
+    !behaviour.pacmanX && quanta.deflectX();
+    !behaviour.pacmanY && quanta.deflectY();
     behaviour.pacmanX && quanta.pacmanX();
     behaviour.pacmanY && quanta.pacmanY();
 

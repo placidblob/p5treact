@@ -3,8 +3,6 @@
     "title": "tadpoles",
     "description": "",
 
-    "deflectX": true,
-    "deflectY": true,
     "pacmanX": true,
     "pacmanY": true,
 
@@ -35,8 +33,6 @@
     "title": "happy discs",
     "description": "",
 
-    "deflectX": true,
-    "deflectY": true,
     "pacmanX": true,
     "pacmanY": true,
 
@@ -67,8 +63,6 @@
     "title": "efervescent",
     "description": "ends up looking like gas molecules escaping a liquid",
 
-    "deflectX": true,
-    "deflectY": true,
     "pacmanX": false,
     "pacmanY": false,
 
@@ -99,8 +93,6 @@
     "title": "stream",
     "description": "they self-organise to act as a stream",
 
-    "deflectX": true,
-    "deflectY": false,
     "pacmanX": false,
     "pacmanY": true,
 
@@ -131,8 +123,6 @@
     "title": "blob",
     "description": "",
 
-    "deflectX": false,
-    "deflectY": false,
     "pacmanX": true,
     "pacmanY": true,
 
