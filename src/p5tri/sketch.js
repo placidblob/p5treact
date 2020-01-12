@@ -17,5 +17,8 @@ export const sketch = (p) => {
     globals.props = newParams.props;
   };
 
-  p.draw = () => globals.props && globals.props.isRunning && globals.flock.draw(p, globals.props.behaviour);
+  p.draw = () =>
+    globals.props &&
+    globals.props.isRunning &&
+    globals.flock.draw(p, globals.props);
 };

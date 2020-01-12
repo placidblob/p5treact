@@ -21,16 +21,20 @@ export class Ball {
   updateTail = (config) => {
     this.tail.push({...this.pos});
 
-    while(this.tail.length > config.tailLength * config.tailSkip)
+    while(this.tail.length > config.tailLength * config.tailModulo)
       this.tail.shift();
   };
 
   step = (p, balls, config, tick) => {
     const quanta = {
-      getAttractiveForce: () => {
+      getAttractiveForce: (neighbouringBalls) => {
+        const balz = neighbouringBalls || balls;
+
         const rtrn = p.createVector();
 
-        balls.forEach(b => {
+        balz.forEach(b => {
+          if( b === this ) return;
+
           const force = p.createVector(b.pos.x - this.pos.x, b.pos.y - this.pos.y);
 
           const distSq = quanta.distanceSq(b);
@@ -45,43 +49,51 @@ export class Ball {
         return rtrn;
       },
 
-      getRepulsiveForce: () => {
+      getRepulsiveForce: (neighbouringBalls) => {
+        const balz = neighbouringBalls || balls;
+
         const rtrn = p.createVector();
 
-        balls.forEach(b => {
-          const force = p.createVector(b.pos.x - this.pos.x, b.pos.y - this.pos.y);
-
-          const distSq = quanta.distanceSq(b);
-
-          if (distSq >= config.cozyDistance**2)
-            return;
-
-          force.setMag((config.cozyDistance**2 - distSq) / config.cozyDistance**2);
-
-          rtrn.add(force);
-        });
+        balz.forEach(b => rtrn.add(quanta.getRepulsiveForceFrom(b.pos, config.cozyDistance**2)));
 
         rtrn.setMag(config.repulsionAmount);
 
         return rtrn;
       },
 
+      getRepulsiveForceFrom: (point, preferredDistanceSq) => {
+        const force = p.createVector(point.x - this.pos.x, point.y - this.pos.y);
+
+        const distSq = quanta.distanceSqFromPoint(point);
+
+        if (distSq >= config.cozyDistance**2)
+          return;
+
+        force.setMag((preferredDistanceSq - distSq) / preferredDistanceSq);
+
+        return force;
+      },
+
       getNeighbours: () => {
         const rtrn = [];
 
         for (let ball of balls)
-          if (quanta.distanceSq(ball) < config.lineOfSight **2)
+          if (ball !== this && quanta.distanceSq(ball) < config.lineOfSight **2)  // TODO: optimize by rectangle first?
             rtrn.push(ball);
 
         return rtrn;
       },
 
-      distanceSq: (ball) => {
-        const diffx = this.pos.x - ball.pos.x;
-        const diffy = this.pos.y - ball.pos.y;
+      distanceSqFromPoint: (point) => {
+        const diffx = this.pos.x - point.x;
+        const diffy = this.pos.y - point.y;
 
         return diffx * diffx + diffy * diffy;
       },
+
+      distanceSq: (ball) => quanta.distanceSqFromPoint(ball.pos),
+
+      avoidMouse: () => this.vel.add(quanta.getRepulsiveForceFrom(p.createVector(p.mouseX, p.mouseY))),
 
       deflectX: () => {
         if (this.pos.x + this.radius > this.maxX || this.pos.x < this.radius) {
@@ -123,24 +135,24 @@ export class Ball {
       },
 
       attraction: () => {
-        const attr = quanta.getAttractiveForce();
+        const attr = quanta.getAttractiveForce(neighbours);
 
         this.vel.add(attr);
       },
 
       repulsion: () => {
-        const attr = quanta.getRepulsiveForce();
+        const attr = quanta.getRepulsiveForce(neighbours);
 
         this.vel.sub(attr);
       },
 
-      limitVelocity: (limitTo) => {
-        if (this.vel.mag() > limitTo)
-          this.vel.setMag(limitTo);
+      limitVelocity: () => {
+        if (this.vel.mag() > config.velocity)
+          this.vel.setMag(config.velocity);
       }
     };
 
-    const neighbours = quanta.getNeighbours(balls, config);
+    const neighbours = quanta.getNeighbours();
 
     config.deflectX && quanta.deflectX();
     config.deflectY && quanta.deflectY();
@@ -153,7 +165,10 @@ export class Ball {
     config.attraction && quanta.attraction();
     config.repulsion && quanta.repulsion();
 
-    config.limitVelocity && quanta.limitVelocity(config.velocity);
+    config.limitVelocity && quanta.limitVelocity();
+
+    // TODO: make it work + put in params:
+    quanta.avoidMouse();
 
     this.pos.add(this.vel);
 
@@ -177,9 +192,9 @@ export class Ball {
       }
 
       const neighbourColor = p.color(
-        totals.r / totals.count,
-        totals.g / totals.count,
-        totals.b / totals.count
+        Math.floor(totals.r / totals.count),
+        Math.floor(totals.g / totals.count),
+        Math.floor(totals.b / totals.count)
       );
 
       return p.lerpColor(this.colour, neighbourColor, config.colourBleedIntensity || 0);
@@ -187,18 +202,19 @@ export class Ball {
 
     let diameter = config.ballRadius * 2;
     const colour = getColour();
-    let multiplier = 1;
+    let sizeMultiplier = 1;
+    let transparencyMultiplier = 1;
     let cnt = 0;
 
     for(let i = this.tail.length - 1; i >= 0 && diameter > 0; i--) {
-      if(cnt++ % config.tailSkip !== 0) continue;
+      if(cnt++ % config.tailModulo !== 0) continue;
 
-      p.strokeWeight(diameter);
-      p.stroke(p.red(colour), p.green(colour), p.blue(colour), multiplier === 1? 190 : multiplier * 128);
+      p.strokeWeight(Math.floor((config.ballRadius * 2) * sizeMultiplier));
+      p.stroke(p.red(colour), p.green(colour), p.blue(colour), Math.floor(170 * transparencyMultiplier));
       p.point(this.tail[i].x, this.tail[i].y);
 
-      multiplier *= config.tailFactor;
-      diameter = Math.floor(diameter * multiplier);
+      transparencyMultiplier = transparencyMultiplier * config.tailTranspFactor;
+      sizeMultiplier = sizeMultiplier * config.tailSizeFactor;
     }
   };
 }

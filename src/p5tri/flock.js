@@ -26,7 +26,7 @@ export class Flock {
 
   // TODO: animated gif stuff - https://gist.github.com/antiboredom/129fd2311dec0046603e
 
-  draw = (p, behaviour) => {
+  draw = (p, {behaviour}) => {
     if(!p || !behaviour) {
       console.error('Flock: no p5 or no behaviour:', p, behaviour);
       return;
@@ -38,6 +38,14 @@ export class Flock {
 
     for( let b of this.zeBalls )
       b.step(p, this.zeBalls, behaviour, this.tick);
+
+//    this.drawMousePoint(p);
+  };
+
+  drawMousePoint = (p) => {
+    p.strokeWeight(15);
+    p.stroke(255, 255, 255, 128);
+    p.point(p.mouseX, p.mouseY);
   }
 }
 

@@ -60,10 +60,24 @@ export class P5triPage
               className={'flexRow'}
               style={{justifyContent: 'space-between', alignItems: 'flex-start'}}
             >
-              <span style={{alignSelf: 'flex-start', marginTop: '5px'}}>
+              <span style={{marginTop: '5px'}} className={'flexCol'}>
                 <P5triComponent
                   p5triParams={this.props.p5triParams}
                 />
+
+                <span className={'flexRow'} style={{alignItems: 'flex-start'}}>
+                  <Button
+                    onClick={() => {
+                      this.props.actions.playPause();
+                    }}
+                    style={{width: '90px'}}
+                  >
+                    {this.props.p5triParams.isRunning ? 'STOP' : `START`}
+                  </Button>
+
+                  {this.renderBehaviourSelector()}
+                </span>
+
               </span>
 
               <Tabs
@@ -93,17 +107,6 @@ export class P5triPage
                 </TabPane>
               </Tabs>
             </span>
-
-            <Button
-              onClick={() => {
-                this.props.actions.playPause();
-              }}
-              style={{width: '90px'}}
-            >
-              {this.props.p5triParams.isRunning ? '-------' : `>>>>>`}
-            </Button>
-
-            {this.renderBehaviourSelector()}
           </>
           || this.renderEmpty
         }

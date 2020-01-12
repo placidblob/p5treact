@@ -18,12 +18,13 @@
     "velocity": 6,
 
     "colourBleed" : true,
-    "colourBleedIntensity": 0.5,
+    "colourBleedIntensity": 0.3,
 
     "lineOfSight": 190,
-    "tailLength": 12,
-    "tailFactor": 0.97,
-    "tailSkip": 2,
+    "tailLength": 8,
+    "tailSizeFactor": 0.9,
+    "tailTranspFactor": 0.7,
+    "tailModulo": 1,
     "ballRadius": 16,
 
     "cozyDistance": 96,
@@ -37,8 +38,8 @@
 
     "deflectX": true,
     "deflectY": true,
-    "pacmanX": false,
-    "pacmanY": false,
+    "pacmanX": true,
+    "pacmanY": true,
 
     "gravity": false,
     "friction": true,
@@ -47,15 +48,16 @@
     "repulsion": true,
 
     "limitVelocity": true,
-    "velocity": 4,
+    "velocity": 3,
 
     "colourBleed" : true,
     "colourBleedIntensity": 0.5,
 
     "lineOfSight": 95,
     "tailLength": 4,
-    "tailFactor": 0.95,
-    "tailSkip": 1,
+    "tailSizeFactor": 0.95,
+    "tailTranspFactor": 0.75,
+    "tailModulo": 1,
     "ballRadius": 12,
 
     "cozyDistance": 96,
@@ -86,8 +88,9 @@
 
     "lineOfSight": 95,
     "tailLength": 4,
-    "tailFactor": 0.95,
-    "tailSkip": 1,
+    "tailSizeFactor": 0.95,
+    "tailTranspFactor": 0.75,
+    "tailModulo": 1,
     "ballRadius": 12,
 
     "cozyDistance": 96,
@@ -118,8 +121,9 @@
 
     "lineOfSight": 95,
     "tailLength": 4,
-    "tailFactor": 0.95,
-    "tailSkip": 1,
+    "tailSizeFactor": 0.95,
+    "tailTranspFactor": 0.75,
+    "tailModulo": 1,
     "ballRadius": 12,
 
     "cozyDistance": 96,
@@ -150,8 +154,9 @@
 
     "lineOfSight": 95,
     "tailLength": 12,
-    "tailFactor": 0.95,
-    "tailSkip": 3,
+    "tailSizeFactor": 0.95,
+    "tailTranspFactor": 0.75,
+    "tailModulo": 3,
     "ballRadius": 12,
 
     "cozyDistance": 96,
