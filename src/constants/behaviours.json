@@ -1,6 +1,6 @@
 [
   {
-    "title": "tadpoles",
+    "title": "fish",
     "description": "",
 
     "pacmanX": true,
@@ -9,22 +9,22 @@
     "gravity": false,
     "friction": true,
 
-    "attraction": false,
+    "attraction": true,
     "repulsion": true,
 
     "limitVelocity": true,
-    "velocity": 6,
+    "velocity": 2,
 
-    "colourBleed" : true,
-    "colourBleedIntensity": 0.3,
+    "colourBleed": false,
+    "colourBleedIntensity": 0.5,
 
-    "tailLength": 8,
-    "tailModulo": 1,
-    "ballRadius": 16,
-    "transparency": 100,
+    "tailLength": 12,
+    "tailModulo": 2,
+    "ballRadius": 12,
+    "transparency": 130,
 
-    "lineOfSight": 190,
-    "cozyDistance": 96,
+    "lineOfSight": 60,
+    "cozyDistance": 50,
     "gravityAmount": 2,
     "attractionAmount": 2,
     "repulsionAmount": 2,
@@ -52,6 +52,36 @@
     "tailModulo": 1,
     "ballRadius": 16,
     "transparency": 130,
+
+    "lineOfSight": 190,
+    "cozyDistance": 96,
+    "gravityAmount": 2,
+    "attractionAmount": 2,
+    "repulsionAmount": 2,
+    "frictionAmount": 0.004
+  },{
+    "title": "tadpoles",
+    "description": "",
+
+    "pacmanX": true,
+    "pacmanY": true,
+
+    "gravity": false,
+    "friction": true,
+
+    "attraction": false,
+    "repulsion": true,
+
+    "limitVelocity": true,
+    "velocity": 6,
+
+    "colourBleed" : true,
+    "colourBleedIntensity": 0.3,
+
+    "tailLength": 8,
+    "tailModulo": 1,
+    "ballRadius": 16,
+    "transparency": 100,
 
     "lineOfSight": 190,
     "cozyDistance": 96,
@@ -110,36 +140,6 @@
 
     "tailLength": 4,
     "tailModulo": 1,
-    "ballRadius": 12,
-    "transparency": 130,
-
-    "lineOfSight": 95,
-    "cozyDistance": 96,
-    "gravityAmount": 2,
-    "attractionAmount": 2,
-    "repulsionAmount": 2,
-    "frictionAmount": 0.004
-  }, {
-    "title": "blob",
-    "description": "",
-
-    "pacmanX": true,
-    "pacmanY": true,
-
-    "gravity": false,
-    "friction": true,
-
-    "attraction": true,
-    "repulsion": true,
-
-    "limitVelocity": true,
-    "velocity": 2,
-
-    "colourBleed": false,
-    "colourBleedIntensity": 0.5,
-
-    "tailLength": 12,
-    "tailModulo": 3,
     "ballRadius": 12,
     "transparency": 130,
 
