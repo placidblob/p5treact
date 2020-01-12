@@ -1,4 +1,4 @@
-import * as p5 from 'p5';
+// import * as p5 from 'p5';
 
 const wanderAngle = 30;
 const velocity = 1;

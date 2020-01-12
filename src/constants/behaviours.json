@@ -20,20 +20,19 @@
     "colourBleed" : true,
     "colourBleedIntensity": 0.3,
 
-    "lineOfSight": 190,
     "tailLength": 8,
-    "tailSizeFactor": 0.9,
-    "tailTranspFactor": 0.7,
     "tailModulo": 1,
     "ballRadius": 16,
+    "transparency": 100,
 
+    "lineOfSight": 190,
     "cozyDistance": 96,
     "gravityAmount": 2,
     "attractionAmount": 2,
     "repulsionAmount": 2,
     "frictionAmount": 0.004
   }, {
-    "title": "gassy",
+    "title": "happy discs",
     "description": "",
 
     "deflectX": true,
@@ -44,22 +43,21 @@
     "gravity": false,
     "friction": true,
 
-    "attraction": false,
-    "repulsion": true,
+    "attraction": true,
+    "repulsion": false,
 
     "limitVelocity": true,
-    "velocity": 3,
+    "velocity": 6,
 
     "colourBleed" : true,
-    "colourBleedIntensity": 0.5,
+    "colourBleedIntensity": 0.3,
 
-    "lineOfSight": 95,
     "tailLength": 4,
-    "tailSizeFactor": 0.95,
-    "tailTranspFactor": 0.75,
     "tailModulo": 1,
-    "ballRadius": 12,
+    "ballRadius": 16,
+    "transparency": 130,
 
+    "lineOfSight": 190,
     "cozyDistance": 96,
     "gravityAmount": 2,
     "attractionAmount": 2,
@@ -86,13 +84,12 @@
     "colourBleed" : true,
     "colourBleedIntensity": 0.5,
 
-    "lineOfSight": 95,
     "tailLength": 4,
-    "tailSizeFactor": 0.95,
-    "tailTranspFactor": 0.75,
     "tailModulo": 1,
     "ballRadius": 12,
+    "transparency": 130,
 
+    "lineOfSight": 95,
     "cozyDistance": 96,
     "gravityAmount": 2,
     "attractionAmount": 2,
@@ -119,13 +116,12 @@
     "colourBleed": false,
     "colourBleedIntensity": 0.5,
 
-    "lineOfSight": 95,
     "tailLength": 4,
-    "tailSizeFactor": 0.95,
-    "tailTranspFactor": 0.75,
     "tailModulo": 1,
     "ballRadius": 12,
+    "transparency": 130,
 
+    "lineOfSight": 95,
     "cozyDistance": 96,
     "gravityAmount": 2,
     "attractionAmount": 2,
@@ -152,13 +148,12 @@
     "colourBleed": false,
     "colourBleedIntensity": 0.5,
 
-    "lineOfSight": 95,
     "tailLength": 12,
-    "tailSizeFactor": 0.95,
-    "tailTranspFactor": 0.75,
     "tailModulo": 3,
     "ballRadius": 12,
+    "transparency": 130,
 
+    "lineOfSight": 95,
     "cozyDistance": 96,
     "gravityAmount": 2,
     "attractionAmount": 2,

@@ -1,4 +1,5 @@
 import * as p5 from 'p5';
+import * as _ from 'lodash';
 
 export class Ball {
 
@@ -62,38 +63,23 @@ export class Ball {
       },
 
       getRepulsiveForceFrom: (point, preferredDistanceSq) => {
-        const force = p.createVector(point.x - this.pos.x, point.y - this.pos.y);
 
         const distSq = quanta.distanceSqFromPoint(point);
 
         if (distSq >= behaviour.cozyDistance_sq)
           return;
 
+        const force = p.createVector(point.x - this.pos.x, point.y - this.pos.y);
+
         force.setMag((preferredDistanceSq - distSq) / preferredDistanceSq);
 
         return force;
       },
 
-      getNeighbours: (theNeighbours = balls) => {
-        const rtrn = [];
-
-        for (let ball of theNeighbours)
-          if (ball !== this && quanta.distanceSq(ball) < behaviour.lineOfSight_sq)  // TODO: optimize by rectangle first?
-            rtrn.push(ball);
-
-        return rtrn;
-      },
-
-      distanceSqFromPoint: (point) => {
-        const diffx = this.pos.x - point.x;
-        const diffy = this.pos.y - point.y;
-
-        return diffx**2 + diffy**2;
-      },
-
+      getNeighbours: (theBalls = balls) => _.filter(theBalls, ball => (ball !== this && quanta.distanceSq(ball) < behaviour.lineOfSight_sq)),
+      distanceSqFromPoint: (point) => (this.pos.x - point.x) **2 + (this.pos.y - point.y) **2,
       distanceSq: (ball) => quanta.distanceSqFromPoint(ball.pos),
-
-      avoidMouse: () => this.vel.add(quanta.getRepulsiveForceFrom(p.createVector(p.mouseX, p.mouseY)), behaviour.cozyDistance_sq),
+      avoidMouse: () => this.vel.add(quanta.getRepulsiveForceFrom(p.createVector(p.mouseX, p.mouseY), behaviour.cozyDistance_sq)),
 
       deflectX: () => {
         if (this.pos.x + this.radius > this.maxX || this.pos.x < this.radius) {
@@ -111,45 +97,13 @@ export class Ball {
         }
       },
 
-      pacmanX: () => {
-        if (this.pos.x > this.maxX)
-          this.pos.x -= this.maxX;
-        else if (this.pos.x < 0)
-          this.pos.x += this.maxX;
-      },
-
-      pacmanY: () => {
-        if (this.pos.y > this.maxY)
-          this.pos.y -= this.maxY;
-        else if (this.pos.y < 0)
-          this.pos.y += this.maxY;
-      },
-
-      gravity: () => {
-        let g = p.createVector(0, behaviour.gravityAmount);
-        this.vel.add(g);
-      },
-
-      friction: () => {
-        this.vel.mult(1 - behaviour.frictionAmount / 10);
-      },
-
-      attraction: () => {
-        const attr = quanta.getAttractiveForce(neighbours);
-
-        this.vel.add(attr);
-      },
-
-      repulsion: () => {
-        const attr = quanta.getRepulsiveForce(neighbours);
-
-        this.vel.sub(attr);
-      },
-
-      limitVelocity: () => {
-        if (this.vel.mag() > behaviour.velocity)
-          this.vel.setMag(behaviour.velocity);
-      }
+      pacmanX: () => this.pos.x = (this.pos.x + this.maxX) % this.maxX,
+      pacmanY: () => this.pos.y = (this.pos.y + this.maxY) % this.maxY,
+      gravity: () => this.vel.add(p.createVector(0, behaviour.gravityAmount)),
+      friction: () => this.vel.mult(1 - behaviour.frictionAmount / 10),
+      attraction: () => this.vel.add(quanta.getAttractiveForce(neighbours)),
+      repulsion: () => this.vel.sub(quanta.getRepulsiveForce(neighbours)),
+      limitVelocity: () => this.vel.mag() > behaviour.velocity && this.vel.setMag(behaviour.velocity),
     };
 
     const neighbours = quanta.getNeighbours();
@@ -203,17 +157,15 @@ export class Ball {
     let diameter = config.ballRadius * 2;
     const colour = getColour();
     let sizeMultiplier = 1;
-    let transparencyMultiplier = 1;
     let cnt = 0;
 
-    for(let i = this.tail.length - 1; i >= 0 && diameter > 0; i--) {
+    for(let i = 0; i < this.tail.length && diameter > 0; i++) {
       if(cnt++ % config.tailModulo !== 0) continue;
 
-      p.strokeWeight(Math.floor((config.ballRadius * 2) * sizeMultiplier));
-      p.stroke(p.red(colour), p.green(colour), p.blue(colour), Math.floor(170 * transparencyMultiplier));
-      p.point(this.tail[i].x, this.tail[i].y);
+      p.strokeWeight(Math.floor((config.ballRadius * 2) * (this.tail.length - i + 1) / this.tail.length));
+      p.stroke(p.red(colour), p.green(colour), p.blue(colour), Math.floor(config.transparency * (this.tail.length - i + 1) / this.tail.length));
+      p.point(this.tail[this.tail.length - i - 1].x, this.tail[this.tail.length - i - 1].y);
 
-      transparencyMultiplier = transparencyMultiplier * config.tailTranspFactor;
       sizeMultiplier = sizeMultiplier * config.tailSizeFactor;
     }
   };

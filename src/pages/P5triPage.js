@@ -54,7 +54,29 @@ export class P5triPage
           this.props.p5triParams && <>
             {/*<h2>{this.props.p5triParams.isRunning ? 'GOGOGOGOGO' : 'STOPSTOPSTOP'}</h2>*/}
 
-            <h2>p5tri dish</h2>
+            <span
+              className={'flexRow'}
+              style={{justifyContent: 'flex-start', alignItems: 'baseline'}}
+            >
+              <h2>
+                p5tri dish
+              </h2>
+              <Button type="primary" shape="circle"
+                icon={this.props.p5triParams.isRunning ? 'pause' : 'caret-right'}
+                onClick={this.props.actions.playPause}
+                style={{marginLeft: '10px'}}
+              />
+              <Button type="primary" shape="circle"
+                icon="sync"
+                onClick={this.props.actions.reset}
+                style={{marginLeft: '5px'}}
+              />
+              <span className={'flexRow'}
+                style={{alignItems: 'flex-start', marginLeft: '10px'}}
+              >
+                {this.renderBehaviourSelector()}
+              </span>
+            </span>
 
             <span
               className={'flexRow'}
@@ -64,20 +86,6 @@ export class P5triPage
                 <P5triComponent
                   p5triParams={this.props.p5triParams}
                 />
-
-                <span className={'flexRow'} style={{alignItems: 'flex-start'}}>
-                  <Button
-                    onClick={() => {
-                      this.props.actions.playPause();
-                    }}
-                    style={{width: '90px'}}
-                  >
-                    {this.props.p5triParams.isRunning ? 'STOP' : `START`}
-                  </Button>
-
-                  {this.renderBehaviourSelector()}
-                </span>
-
               </span>
 
               <Tabs

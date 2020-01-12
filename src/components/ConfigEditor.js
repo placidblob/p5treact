@@ -11,6 +11,8 @@ import * as uiActions from "../actions/uiActions";
 
 const actions = combine(p5triActions, uiActions);
 
+const shouldBeShown = paramName => paramName !== 'title' && paramName !== 'description' && paramName.indexOf('_sq') === -1;
+
 export class ConfigEditor
   extends React.Component {
 
@@ -68,10 +70,9 @@ export class ConfigEditor
       title={this.props.title || "Configuration"}
       size={this.props.indent? 'small' : 'default'}
       bodyStyle={{display: 'flex', flexDirection: 'column'}}
-      // headStyle={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}
     >
       {
-        _.map(_.keys(this.props.config), (k) => {
+        _.map(_.filter(_.keys(this.props.config), shouldBeShown), (k) => {
           if (_.keys(this.props.config[k]).length < 1 || typeof this.props.config[k] === 'string')
             return <span
               className={'flexRow'}
@@ -81,15 +82,6 @@ export class ConfigEditor
               <span>{k}:</span>
               {this.renderElement(this.props.config[k], k)}
             </span>;
-
-          // return <ConfigEditor
-          //   key={k}
-          //   title={k}
-          //   config={this.props.config[k]}
-          //   indent={this.props.indent? this.props.indent + 1 : 1}
-          //   parentKeys={this.props.parentKeys? _.union(this.props.parentKeys, [k]) : [k]}
-          //   actions={this.props.actions}
-          // />;
         })
       }
     </Card>
