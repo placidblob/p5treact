@@ -19,25 +19,11 @@ import * as p5triActions from "../actions/p5triActions";
 import * as uiActions from "../actions/uiActions";
 const actions = combine(p5triActions, uiActions);
 
-const renderFooter = () => <Footer className='footer'>Remember what the dormouse said.</Footer>;
-
-const renderContent = () =>
-  <Content style={{ margin: '0 16px' }}>
-
-    <Switch>
-      <Route exact path="/" component={P5triPage} />
-      <Route path="/fuel-savings" component={FuelSavingsPage} />
-      <Route path="/about" component={AboutPage} />
-      <Route component={NotFoundPage} />
-    </Switch>
-
-  </Content>;
-
 
 class App
     extends React.Component {
 
-  renderHeader = <Header>
+  renderHeader = () => <Header>
     <div className="logo" />
     <Menu
       theme="dark"
@@ -45,44 +31,66 @@ class App
       defaultSelectedKeys={['1']}
       style={{ lineHeight: '64px' }}
     >
-      <Menu.Item key="1" onClick={() => {this.props.actions.selectP5triType(dishType.BALLS)}}>balls</Menu.Item>
-      <Menu.Item key="2" onClick={() => {this.props.actions.selectP5triType(dishType.ANTS)}}>ants</Menu.Item>
+      <Menu.Item key="1" onClick={() => {this.props.actions.selectP5triType(dishType.BALLS)}}>
+        <NavLink exact to="/">
+          <Icon type="fire" theme="outlined" />
+          <span>balls</span>
+        </NavLink>
+      </Menu.Item>
+      <Menu.Item key="2" onClick={() => {this.props.actions.selectP5triType(dishType.ANTS)}}>
+        <NavLink exact to="/">
+          <Icon type="bug"/>
+          <span>ants</span>
+        </NavLink>
+      </Menu.Item>
+      <Menu.Item key="3">
+        <NavLink to="/about">About</NavLink>
+      </Menu.Item>
     </Menu>
   </Header>;
 
-  renderSlider = () => {
-    const activeStyle = { color: 'tomato' };
-
-    return <Sider
-      collapsible
-      collapsed={this.props.ui.showMainSlider}
-      onCollapse={this.props.actions.toggleMainSlider}
+  renderSlider = () => <Sider
+    collapsible
+    collapsed={this.props.ui.showMainSlider}
+    onCollapse={this.props.actions.toggleMainSlider}
+  >
+    <Menu
+      theme="dark"
+      // defaultSelectedKeys={['1']}
+      mode="inline"
     >
-      <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-        <Menu.Item key="1">
-          <Icon type="fire"/>
-          <NavLink exact to="/" activeStyle={activeStyle}>p5tri</NavLink>
-        </Menu.Item>
-        <Menu.Item key="2">
-          <Icon type="coffee"/>
-          <NavLink to="/fuel-savings" activeStyle={activeStyle}>Demo App</NavLink>
-        </Menu.Item>
-        <Menu.Item key="3">
-          <Icon type="bug"/>
-          <NavLink to="/about" activeStyle={activeStyle}>About</NavLink>
-        </Menu.Item>
-      </Menu>
-    </Sider>;
-  };
+{/*
+      <Menu.Item key="1">
+        <Icon type="fire"/>
+      </Menu.Item>
+      <Menu.Item key="2">
+        <Icon type="coffee"/>
+      </Menu.Item>
+      <Menu.Item key="3">
+        <Icon type="bug"/>
+      </Menu.Item>
+*/}
+    </Menu>
+  </Sider>;
+
+  renderContent = () => <Content style={{ margin: '0 16px' }}>
+    <Switch>
+      <Route exact path="/" component={P5triPage} />
+      <Route path="/about" component={AboutPage} />
+      <Route component={NotFoundPage} />
+    </Switch>
+  </Content>;
+
+  renderFooter = <Footer className='footer'>Remember what the dormouse said.</Footer>;
 
   render = () =>
     <Layout style={{ minHeight: '100vh' }}>
-      { this.renderHeader }
+      { this.renderHeader() }
       <Layout>
         { this.renderSlider() }
         <Layout style={{marginTop: '10px'}}>
-          { renderContent() }
-          { renderFooter() }
+          { this.renderContent() }
+          { this.renderFooter }
         </Layout>
       </Layout>
     </Layout>;
