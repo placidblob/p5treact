@@ -7,8 +7,10 @@ import {combine} from '../utils'
 
 import * as p5triActions from "../actions/p5triActions";
 import * as uiActions from "../actions/uiActions";
+import * as dishTypes from '../constants/dishTypes';
 import {P5triComponent} from "../components/P5triComponent";
 import {ConfigEditor} from "../components/ConfigEditor";
+import {globals} from '../p5tri';
 
 const { TabPane } = Tabs;
 
@@ -31,20 +33,21 @@ export class P5triPage
       <Tag color='lime'>doink</Tag>
      </span>;
 
-  renderBehaviourSelector =  () => <span style={{ marginTop: 16 }}>
-    <Radio.Group onChange={e => this.props.actions.selectBehaviour({behaviour: e.target.value})}>
-      {
-        behaviours.map((behaviour, index) =>
-          <Radio.Button
-            value={behaviour}
-            key={index}
-          >
-            {behaviour.title}
-          </Radio.Button>
-        )
-      }
-    </Radio.Group>
-  </span>;
+  renderBehaviourSelector =  () => globals.logicType === dishTypes.BALLS &&
+    <span style={{ marginTop: 16 }}>
+      <Radio.Group onChange={e => this.props.actions.selectBehaviour({behaviour: e.target.value})}>
+        {
+          behaviours.map((behaviour, index) =>
+            <Radio.Button
+              value={behaviour}
+              key={index}
+            >
+              {behaviour.title}
+            </Radio.Button>
+          )
+        }
+      </Radio.Group>
+    </span>;
 
   render = () => {
     console.log('>>>>>> page props', this.props);

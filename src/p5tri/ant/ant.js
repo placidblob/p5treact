@@ -1,4 +1,4 @@
-import globals from '../globals';
+import {globals} from '../globals';
 import * as _ from 'lodash';
 
 const wanderAngle = 30;

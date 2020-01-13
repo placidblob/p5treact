@@ -41,7 +41,13 @@ class App
           <span>ants</span>
         </NavLink>
       </Menu.Item>
-      <Menu.Item key="3">
+      <Menu.Item key="3" onClick={() => {this.props.actions.selectP5triType(dishType.SANDBOX)}}>
+        <NavLink exact to="/">
+          <Icon type="experiment"/>
+          <span>sandbox</span>
+        </NavLink>
+      </Menu.Item>
+      <Menu.Item key="9">
         <NavLink to="/about">About</NavLink>
       </Menu.Item>
     </Menu>

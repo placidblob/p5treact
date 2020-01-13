@@ -1,7 +1,7 @@
 import * as types from '../constants/actionTypes';
 import initialState from './initialState';
 import {combine} from '../utils'
-import globals from '../p5tri/globals'
+import {globals} from '../p5tri/globals'
 
 const reducerMap = {
   [types.PLAY_PAUSE]: (prevState) => ({isRunning: !prevState.isRunning}),
