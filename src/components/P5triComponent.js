@@ -10,7 +10,6 @@ import * as uiActions from "../actions/uiActions";
 const actions = combine(p5triActions, uiActions);
 
 import * as p5tri from '../p5tri';
-import globals from "../p5tri/globals";
 
 export class P5triComponent
   extends React.Component {
@@ -19,8 +18,7 @@ export class P5triComponent
     super(props);
 
     this.state = {
-      // stateSketch: (p) => p5tri.sketch(p, globals.nest)
-      stateSketch: (p) => p5tri.sketch(p, globals.flock)
+      stateSketch: p5tri.sketch
     };
   }
 

@@ -4,6 +4,8 @@ export const CALCULATE_FUEL_SAVINGS = 'CALCULATE_FUEL_SAVINGS';
 
 //////////////////// p5tri actions ////////////////////
 
+export const SELECT_P5TRI_TYPE = 'SELECT_P5TRI_TYPE';
+
 export const PLAY_PAUSE = 'PLAY_PAUSE';
 export const RESET_SIMULATION = 'RESET_SIMULATION';
 export const SELECT_BEHAVIOUR = 'SELECT_BEHAVIOUR';

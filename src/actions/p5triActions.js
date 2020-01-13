@@ -53,3 +53,20 @@ export function changeAttribute(settings) {
     });
   };
 }
+
+export function selectP5triType(settings) {
+  return function (dispatch) {
+
+    console.log('+++ dispatching', {
+      type: types.SELECT_P5TRI_TYPE,
+      payload: settings
+    });
+
+    // thunks allow for pre-processing actions, calling apis, and dispatching multiple actions
+    // in this case at this point we could call a service that would persist the fuel savings
+    return dispatch({
+      type: types.SELECT_P5TRI_TYPE,
+      payload: settings
+    });
+  };
+}

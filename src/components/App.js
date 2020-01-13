@@ -8,6 +8,7 @@ import React from "react";
 import { hot } from "react-hot-loader";
 import P5triPage from "../pages/P5triPage";
 import {combine} from '../utils'
+import * as dishType from '../constants/dishTypes';
 
 import { Layout, Menu, Icon } from 'antd';
 import {bindActionCreators} from "redux";
@@ -17,21 +18,6 @@ const { Header, Content, Footer, Sider } = Layout;
 import * as p5triActions from "../actions/p5triActions";
 import * as uiActions from "../actions/uiActions";
 const actions = combine(p5triActions, uiActions);
-
-const renderHeader = () =>
-  <Header>
-    <div className="logo" />
-    <Menu
-      theme="dark"
-      mode="horizontal"
-      defaultSelectedKeys={['2']}
-      style={{ lineHeight: '64px' }}
-    >
-      <Menu.Item key="1">nav 1</Menu.Item>
-      <Menu.Item key="2">nav 2</Menu.Item>
-      <Menu.Item key="3">nav 3</Menu.Item>
-    </Menu>
-  </Header>;
 
 const renderFooter = () => <Footer className='footer'>Remember what the dormouse said.</Footer>;
 
@@ -50,6 +36,19 @@ const renderContent = () =>
 
 class App
     extends React.Component {
+
+  renderHeader = <Header>
+    <div className="logo" />
+    <Menu
+      theme="dark"
+      mode="horizontal"
+      defaultSelectedKeys={['1']}
+      style={{ lineHeight: '64px' }}
+    >
+      <Menu.Item key="1" onClick={() => {this.props.actions.selectP5triType(dishType.BALLS)}}>balls</Menu.Item>
+      <Menu.Item key="2" onClick={() => {this.props.actions.selectP5triType(dishType.ANTS)}}>ants</Menu.Item>
+    </Menu>
+  </Header>;
 
   renderSlider = () => {
     const activeStyle = { color: 'tomato' };
@@ -76,20 +75,17 @@ class App
     </Sider>;
   };
 
-  render() {
-    return (
-      <Layout style={{ minHeight: '100vh' }}>
-        { renderHeader() }
-        <Layout>
-          { this.renderSlider() }
-          <Layout style={{marginTop: '10px'}}>
-            { renderContent() }
-            { renderFooter() }
-          </Layout>
+  render = () =>
+    <Layout style={{ minHeight: '100vh' }}>
+      { this.renderHeader }
+      <Layout>
+        { this.renderSlider() }
+        <Layout style={{marginTop: '10px'}}>
+          { renderContent() }
+          { renderFooter() }
         </Layout>
       </Layout>
-    )
-  }
+    </Layout>;
 }
 
 App.propTypes = {

@@ -52,8 +52,6 @@ export class P5triPage
     return <>
         {
           this.props.p5triParams && <>
-            {/*<h2>{this.props.p5triParams.isRunning ? 'GOGOGOGOGO' : 'STOPSTOPSTOP'}</h2>*/}
-
             <span
               className={'flexRow'}
               style={{justifyContent: 'flex-start', alignItems: 'baseline'}}

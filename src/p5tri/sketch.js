@@ -1,14 +1,17 @@
 import globals from './globals';
+import * as dishTypes from '../constants/dishTypes';
 
-export const sketch = (p, logicObject) => {
-  p.angleMode(p.DEGREES); // Change the mode to DEGREES
+export const sketch = (p) => {
+  p.angleMode(p.DEGREES);
 
   globals.p = p;
+
+  const getLogicObject = () => globals.logicType === dishTypes.ANTS? globals.nest : globals.flock;
 
   p.setup = () => {
     console.log('$$$ SKETCH.SETUP()');
 
-    logicObject.setup(p, globals.props, true);
+    getLogicObject().setup(p, globals.props, true);
   };
 
   p.myCustomRedrawAccordingToNewPropsHandler = (newParams) => {
@@ -22,5 +25,5 @@ export const sketch = (p, logicObject) => {
   p.draw = () =>
     globals.props &&
     globals.props.isRunning &&
-    logicObject.draw(p, globals.props);
+    getLogicObject().draw(p, globals.props);
 };

@@ -7,6 +7,11 @@ const reducerMap = {
   [types.PLAY_PAUSE]: (prevState) => ({isRunning: !prevState.isRunning}),
   [types.RESET_SIMULATION]: () => { globals.p.setup(); return {}; },
   [types.SELECT_BEHAVIOUR]: (prevState, action) => action.payload,
+  [types.SELECT_P5TRI_TYPE]: (prevState, action) => {
+    globals.logicType = action.payload;
+    globals.p.setup();
+    return {dishType: action.payload};
+  },
   [types.CHANGE_ATTRIBUTE]: (prevState, action) => {
     const {key, parentKey, value} = action.payload;
 
