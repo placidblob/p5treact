@@ -1,14 +1,16 @@
 import { NavLink, Route, Switch } from "react-router-dom";
+import React from "react";
+import { hot } from "react-hot-loader";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFlask, faBug, faFireAlt, faCarrot } from '@fortawesome/free-solid-svg-icons'
 
 import AboutPage from "../pages/AboutPage";
 import PropTypes from "prop-types";
-import React from "react";
-import { hot } from "react-hot-loader";
 import P5triPage from "../pages/P5triPage";
 import {combine} from '../utils'
 import * as dishType from '../constants/dishTypes';
 
-import { Layout, Menu, Icon } from 'antd';
+import { Layout, Menu } from 'antd';
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 const { Header, Content, Footer, Sider } = Layout;
@@ -31,24 +33,27 @@ class App
     >
       <Menu.Item key="1" onClick={() => {this.props.actions.selectP5triType(dishType.BALLS)}}>
         <NavLink exact to="/">
-          <Icon type="fire" theme="outlined" />
+          <FontAwesomeIcon icon={faFireAlt} style={{marginRight: '7px'}}/>
           <span>balls</span>
         </NavLink>
       </Menu.Item>
       <Menu.Item key="2" onClick={() => {this.props.actions.selectP5triType(dishType.ANTS)}}>
         <NavLink exact to="/">
-          <Icon type="bug"/>
+          <FontAwesomeIcon icon={faBug} style={{marginRight: '7px'}}/>
           <span>ants</span>
         </NavLink>
       </Menu.Item>
       <Menu.Item key="3" onClick={() => {this.props.actions.selectP5triType(dishType.SANDBOX)}}>
         <NavLink exact to="/">
-          <Icon type="experiment"/>
+          <FontAwesomeIcon icon={faFlask} style={{marginRight: '7px'}}/>
           <span>sandbox</span>
         </NavLink>
       </Menu.Item>
       <Menu.Item key="9">
-        <NavLink to="/about">About</NavLink>
+        <NavLink to="/about">
+          <FontAwesomeIcon icon={faCarrot} style={{marginRight: '7px'}}/>
+          <span>About</span>
+        </NavLink>
       </Menu.Item>
     </Menu>
   </Header>;
