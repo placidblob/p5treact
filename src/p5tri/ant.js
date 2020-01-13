@@ -4,7 +4,7 @@ import * as _ from 'lodash';
 const wanderAngle = 30;
 const velocity = 4;
 const antSize = 8;
-const coolDownTime = 30;
+const coolDownTime = 10;
 
 export class Ant {
 
@@ -16,16 +16,11 @@ export class Ant {
     this.cooldown = 0;
   }
 
-  isOnThing = (things) => {
-    for(let t of things)
-      if(
-        Math.abs(this.pos.x - t.pos.x) < antSize / 2 &&
-        Math.abs(this.pos.y - t.pos.y) < antSize / 2
-      )
-        return t;
-
-      return null;
-  };
+  isOnThing = (things) => _.find(things, t =>
+    !t.isBeingCarried &&
+    Math.abs(this.pos.x - t.pos.x) < antSize / 2 &&
+    Math.abs(this.pos.y - t.pos.y) < antSize / 2
+  );
 
   freeThings = (things) => _.filter(things, t => !t.isBeingCarried);
 
@@ -36,24 +31,22 @@ export class Ant {
       this.cooldown--;
 
     if(this.cooldown <= 0) {
-      const thing = this.isOnThing(this.freeThings(things));
+      const otherThing = this.isOnThing(things);
 
-      if (thing) {
-        if (this.thing) {
-          // drop thing
+      if (otherThing) {
+        if (this.thing) { // drop thing
           this.thing.isBeingCarried = false;
           this.thing.pos = this.pos.copy();
           this.thing = null;
-
-          // turn around
-          this.angle = (this.angle + 180) % 360;
-
           this.cooldown = coolDownTime;
-        } else {
-          // pick up thing
-          this.thing = thing;
-          thing.isBeingCarried = true;
+
+        } else { // pick up thing
+          this.thing = otherThing;
+          otherThing.isBeingCarried = true;
         }
+
+        // turn around
+        this.angle = (this.angle + 180) % 360;
       }
     }
 
@@ -75,17 +68,27 @@ export class Ant {
 
 
   show = (p) => {
+    const colours = {
+      carrying: p.color(67, 141, 128),
+      cooldown: p.color(255, 219, 88),
+      normal: p.color(255, 99, 71)
+    };
+
     const getColor = () => {
       if(this.thing)
-        return p.color(67, 141, 128);
+        return colours.carrying;
       if(this.cooldown > 0)
-        return p.color(255, 219, 88);
-      return p.color(255, 99, 71);
+        return colours.cooldown;
+      return colours.normal;
     };
 
     p.rectMode(p.CENTER);
 
     p.fill(getColor());
+    p.square(this.pos.x, this.pos.y, antSize, 3, 3, 3, 3);
+
+    p.noFill();
+    p.stroke(0,0,0, 180);
     p.square(this.pos.x, this.pos.y, antSize, 3, 3, 3, 3);
   };
 }

@@ -3,7 +3,7 @@ import globals from './globals';
 import {Thing} from "./thing";
 
 const nestPopulation = 256;
-const thingPopulation = 1024;
+const thingPopulation = 3* 1024;
 
 export class Nest {
 
