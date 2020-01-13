@@ -4,8 +4,6 @@ export const sketch = (p) => {
   globals.p = p;
   globals.sketch = this;
 
-  p.angleMode(p.DEGREES);
-
   p.setup = () => {
     console.log('$$$ SKETCH.SETUP()');
 

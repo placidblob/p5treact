@@ -1,44 +1,71 @@
-// import * as ml5 from 'ml5';
-//
-// // Options for the SpeechCommands18w model, the default probabilityThreshold is 0
-// const options = { probabilityThreshold: 0.7 };
-// const classifier = ml5.soundClassifier('SpeechCommands18w', options, modelReady);
-//
-// function modelReady() {
-//   // classify sound
-//   classifier.classify(gotResult);
-// }
-//
-// function gotResult(error, result) {
-//   if (error) {
-//     console.log(error);
-//     return;
-//   }
-//   // log the result
-//   console.log('************ >>', result);
-// }
+import {oppositeColour, promise2dNoiseMap, promiseColourMap, promiseDirectionMap} from '../../utils'
 
 export class Experiments {
   tick = 0;
+  // noise = new OpenSimplexNoise(Math.floor(Math.random() * Math.floor(10)));
+  colourMap = undefined;
+  directionMap = undefined;
+  amplitudeMap = undefined;
 
   setup = (p, props) => {
-      if (!p || !props) return;
+    if (!p || !props) return;
 
-      p.createCanvas(props.dishConfig.width, props.dishConfig.height);
+    const {width, height} = props.dishConfig;
+
+    p.angleMode(p.RADIANS);
+
+    p.createCanvas(width, height);
+    p.background(128);
+
+    promiseColourMap(p, width, height).then((val) => this.colourMap = val);
+    promiseDirectionMap(p, width, height).then((val) => this.directionMap = val);
+    promise2dNoiseMap(p, width, height).then((val) => this.amplitudeMap = val);
+  };
+
+  drawColourMap = (p, props) => {
+    const {width, height} = props.dishConfig;
+    this.tick++;
+
+    p.strokeWeight(1);
+    let img = p.createImage(width, height);
+    img.loadPixels();
+
+    for(let x = 0; x < width; x++)
+      for(let y = 0; y < height; y++)
+        img.set(x, y, this.colourMap[x][y]);
+
+    img.updatePixels();
+    p.image(img, 0,0);
+  };
+
+  drawDirectionMap = (p, props, size = 20) => {
+    const {width, height} = props.dishConfig;
+
+    for(let x = size; x < width - size; x += size)
+      for(let y = size; y < height - size; y += size) {
+        const start = p.createVector(x, y);
+        const end = this.directionMap[x][y].copy();
+        end.setMag(this.amplitudeMap[x][y] * size);
+        end.add(start);
+
+        p.strokeWeight(1);
+        const lineColour = oppositeColour(p, this.colourMap[x][y]);
+        p.stroke(p.red(lineColour) * 0.7, p.green(lineColour) * 0.7, p.red(lineColour) * 0.2, 255);
+        p.line(x, y, end.x, end.y);
+
+        p.strokeWeight(3);
+        p.stroke(32, 96);
+        p.point(x, y);
+      }
   };
 
   draw = (p, props) => {
-    this.tick++;
+    if (!this.colourMap || !this.directionMap || !this.amplitudeMap) return;
 
-    p.background(51);
+    this.drawColourMap(p, props);
+    this.drawDirectionMap(p, props);
 
-    const pos = p.createVector(p.random(0,props.dishConfig.width), p.random(0,props.dishConfig.height));
-    const colour = p.color(255,255,255);
-
-    p.strokeWeight(20);
-    p.stroke(colour);
-    p.point(pos.x, pos.y);
-
+    p.noLoop();
   };
 }
 

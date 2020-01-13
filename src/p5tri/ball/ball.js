@@ -163,7 +163,7 @@ export class Ball {
       if(cnt++ % config.tailModulo !== 0) continue;
 
       p.strokeWeight(Math.floor((config.ballRadius * 2) * (this.tail.length - i + 1) / this.tail.length));
-      p.stroke(p.red(colour), p.green(colour), p.blue(colour), Math.floor(config.transparency * (this.tail.length - i + 1) / this.tail.length));
+      p.stroke(p.red(colour), p.green(colour), p.blue(colour), Math.floor(config.transparency * (this.tail.length - i) / this.tail.length));
       p.point(this.tail[this.tail.length - i - 1].x, this.tail[this.tail.length - i - 1].y);
 
       sizeMultiplier = sizeMultiplier * config.tailSizeFactor;

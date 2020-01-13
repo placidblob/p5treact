@@ -14,6 +14,8 @@ export class Nest {
   setup = (p, props, initBalls = (this.zeAnts.length === 0)) => {
     if (!p || !props) return;
 
+    p.angleMode(p.DEGREES);
+
     p.createCanvas(props.dishConfig.width, props.dishConfig.height);
 
     if (initBalls)

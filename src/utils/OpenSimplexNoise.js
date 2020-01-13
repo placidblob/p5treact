@@ -13,7 +13,7 @@ const NORM_3D = 1 / 103;
 const NORM_4D = 1 / 30;
 
 
-class OpenSimplexNoise {
+export class OpenSimplexNoise {
 
   constructor(seed) {
     const rand = (function xoshiro128ss(a, b, c, d) {
