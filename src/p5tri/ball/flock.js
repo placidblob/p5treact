@@ -1,5 +1,5 @@
 import {Ball} from './ball';
-import globals from './globals';
+import globals from '../globals';
 
 
 export class Flock {

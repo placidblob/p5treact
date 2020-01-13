@@ -1,5 +1,5 @@
-import {Flock} from './flock';
-import {Nest} from './nest';
+import {Flock} from './ball/flock';
+import {Nest} from './ant/nest';
 import * as dishTypes from '../constants/dishTypes';
 
 export default {

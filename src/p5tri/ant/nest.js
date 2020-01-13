@@ -1,5 +1,5 @@
 import {Ant} from './ant';
-import globals from './globals';
+import globals from '../globals';
 import {Thing} from "./thing";
 
 const nestPopulation = 256;
