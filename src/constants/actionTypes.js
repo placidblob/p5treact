@@ -1,7 +1,3 @@
-export const SAVE_FUEL_SAVINGS = 'SAVE_FUEL_SAVINGS';
-export const CALCULATE_FUEL_SAVINGS = 'CALCULATE_FUEL_SAVINGS';
-
-
 //////////////////// p5tri actions ////////////////////
 
 export const SELECT_P5TRI_TYPE = 'SELECT_P5TRI_TYPE';

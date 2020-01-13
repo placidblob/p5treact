@@ -1,8 +1,6 @@
 import { NavLink, Route, Switch } from "react-router-dom";
 
-import AboutPage from "../pages/demo/AboutPage";
-import FuelSavingsPage from "../pages/demo/FuelSavingsPage";
-import NotFoundPage from "../pages/demo/NotFoundPage";
+import AboutPage from "../pages/AboutPage";
 import PropTypes from "prop-types";
 import React from "react";
 import { hot } from "react-hot-loader";
@@ -77,7 +75,7 @@ class App
     <Switch>
       <Route exact path="/" component={P5triPage} />
       <Route path="/about" component={AboutPage} />
-      <Route component={NotFoundPage} />
+      {/*<Route component={NotFoundPage} />*/}
     </Switch>
   </Content>;
 
