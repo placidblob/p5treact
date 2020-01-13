@@ -1,5 +1,5 @@
 export * from './ant';
 export * from './ball';
-export * from './sandbox';
+export * from './experiments';
 export * from './sketch';
 export * from './globals';

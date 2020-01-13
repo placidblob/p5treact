@@ -1,14 +1,14 @@
 import {Flock} from './ball/flock';
 import {Nest} from './ant/nest';
 import * as dishTypes from '../constants/dishTypes';
-import {Sandbox} from "./sandbox";
+import {Experiments} from "./experiments";
 
 export const globals = {
   sketch: undefined,
 
   flock: new Flock(),
   nest: new Nest(),
-  sandbox: new Sandbox(),
+  experiments: new Experiments(),
 
   params: undefined,
   p: undefined,
@@ -18,7 +18,7 @@ export const globals = {
 export const logicMap = {
   BALLS: () => globals.flock,
   ANTS: () => globals.nest,
-  SANDBOX: () => globals.sandbox,
+  EXPERIMENTS: () => globals.experiments,
 };
 
 export const getLogic = () => logicMap[globals.logicType] && logicMap[globals.logicType]() || globals.nest;

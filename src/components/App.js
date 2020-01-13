@@ -2,7 +2,7 @@ import { NavLink, Route, Switch } from "react-router-dom";
 import React from "react";
 import { hot } from "react-hot-loader";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFlask, faBug, faFireAlt, faCarrot } from '@fortawesome/free-solid-svg-icons'
+import { faFlask, faBug, faFireAlt, faCarrot, faKiwiBird } from '@fortawesome/free-solid-svg-icons'
 
 import AboutPage from "../pages/AboutPage";
 import PropTypes from "prop-types";
@@ -17,6 +17,7 @@ const { Header, Content, Footer, Sider } = Layout;
 
 import * as p5triActions from "../actions/p5triActions";
 import * as uiActions from "../actions/uiActions";
+import SandboxPage from "../pages/SandboxPage";
 const actions = combine(p5triActions, uiActions);
 
 
@@ -43,13 +44,19 @@ class App
           <span>ants</span>
         </NavLink>
       </Menu.Item>
-      <Menu.Item key="3" onClick={() => {this.props.actions.selectP5triType(dishType.SANDBOX)}}>
+      <Menu.Item key="3" onClick={() => {this.props.actions.selectP5triType(dishType.EXPERIMENTS)}}>
         <NavLink exact to="/">
           <FontAwesomeIcon icon={faFlask} style={{marginRight: '7px'}}/>
+          <span>experiments</span>
+        </NavLink>
+      </Menu.Item>
+      <Menu.Item key="4">
+        <NavLink exact to="/sandbox">
+          <FontAwesomeIcon icon={faKiwiBird} style={{marginRight: '7px'}}/>
           <span>sandbox</span>
         </NavLink>
       </Menu.Item>
-      <Menu.Item key="9">
+      <Menu.Item key="99">
         <NavLink to="/about">
           <FontAwesomeIcon icon={faCarrot} style={{marginRight: '7px'}}/>
           <span>About</span>
@@ -85,6 +92,7 @@ class App
   renderContent = () => <Content style={{ margin: '0 16px' }}>
     <Switch>
       <Route exact path="/" component={P5triPage} />
+      <Route path="/sandbox" component={SandboxPage} />
       <Route path="/about" component={AboutPage} />
       {/*<Route component={NotFoundPage} />*/}
     </Switch>

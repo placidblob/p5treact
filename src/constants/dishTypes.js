@@ -1,4 +1,4 @@
 export const BALLS = 'BALLS';
 export const ANTS = 'ANTS';
-export const SANDBOX = 'SANDBOX';
+export const EXPERIMENTS = 'EXPERIMENTS';
 

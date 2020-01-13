@@ -1,9 +1,10 @@
 import {globals, getLogic} from './globals';
 
 export const sketch = (p) => {
-  p.angleMode(p.DEGREES);
-
   globals.p = p;
+  globals.sketch = this;
+
+  p.angleMode(p.DEGREES);
 
   p.setup = () => {
     console.log('$$$ SKETCH.SETUP()');
@@ -19,8 +20,10 @@ export const sketch = (p) => {
     globals.props = newParams.props;
   };
 
+  p.actuallyDraw = () => getLogic().draw(p, globals.props);
+
   p.draw = () =>
     globals.props &&
     globals.props.isRunning &&
-    getLogic().draw(p, globals.props);
+    p.actuallyDraw();
 };

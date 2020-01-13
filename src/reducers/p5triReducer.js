@@ -1,15 +1,20 @@
 import * as types from '../constants/actionTypes';
 import initialState from './initialState';
 import {combine} from '../utils'
-import {globals} from '../p5tri/globals'
+import {globals, getLogic} from '../p5tri/globals'
 
 const reducerMap = {
   [types.PLAY_PAUSE]: (prevState) => ({isRunning: !prevState.isRunning}),
-  [types.RESET_SIMULATION]: () => { globals.p.setup(); return {}; },
+  [types.RESET_SIMULATION]: () => {
+    globals.p.setup();
+    globals.p.actuallyDraw();
+    return {};
+  },
   [types.SELECT_BEHAVIOUR]: (prevState, action) => action.payload,
   [types.SELECT_P5TRI_TYPE]: (prevState, action) => {
     globals.logicType = action.payload;
     globals.p.setup();
+    globals.p.actuallyDraw();
     return {dishType: action.payload};
   },
   [types.CHANGE_ATTRIBUTE]: (prevState, action) => {
