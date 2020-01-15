@@ -141,7 +141,7 @@ export class Ball {
   };
 
   show = (p, neighbours, config) => {
-    const {tailLength, ballRadius, colourBleed, colourBleedIntensity} = config;
+    const {tailLength, ballRadius, colourBleed, colourBleedIntensity, initialTransp} = config;
     const getColour = () => {
       if(!config || !colourBleed)
         return this.colour;
@@ -165,7 +165,7 @@ export class Ball {
     };
 
     const colour = getColour();
-    let transp = 255;
+    let transp = initialTransp;
     let radius = ballRadius;
     let radiusDiff = tailLength >= 0? radius / tailLength : 0;
 

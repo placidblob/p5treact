@@ -21,6 +21,7 @@
     "tailLength": 4,
     "tailModulo": 2,
     "ballRadius": 16,
+    "initialTransp": 140,
 
     "lineOfSight": 60,
     "cozyDistance": 50,
@@ -29,7 +30,7 @@
     "repulsionAmount": 2,
     "frictionAmount": 0.004
   }, {
-    "title": "happy discs",
+    "title": "marbles",
     "description": "",
 
     "pacmanX": true,
@@ -50,15 +51,46 @@
     "tailLength": 3,
     "tailModulo": 1,
     "ballRadius": 16,
+    "initialTransp": 140,
 
-    "lineOfSight": 190,
-    "cozyDistance": 96,
+    "lineOfSight": 120,
+    "cozyDistance": 30,
+    "gravityAmount": 2,
+    "attractionAmount": 2,
+    "repulsionAmount": 2,
+    "frictionAmount": 0.004
+  }, {
+    "title": "ripples",
+    "description": "",
+
+    "pacmanX": true,
+    "pacmanY": true,
+
+    "gravity": false,
+    "friction": true,
+
+    "attraction": true,
+    "repulsion": false,
+
+    "limitVelocity": true,
+    "velocity": 6,
+
+    "colourBleed" : true,
+    "colourBleedIntensity": 0.3,
+
+    "tailLength": 3,
+    "tailModulo": 1,
+    "ballRadius": 16,
+    "initialTransp": 140,
+
+    "lineOfSight": 120,
+    "cozyDistance": 90,
     "gravityAmount": 2,
     "attractionAmount": 2,
     "repulsionAmount": 2,
     "frictionAmount": 0.004
   },{
-    "title": "tadpoles",
+    "title": "spread",
     "description": "",
 
     "pacmanX": true,
@@ -79,66 +111,9 @@
     "tailLength": 6,
     "tailModulo": 1,
     "ballRadius": 16,
+    "initialTransp": 140,
 
     "lineOfSight": 190,
-    "cozyDistance": 96,
-    "gravityAmount": 2,
-    "attractionAmount": 2,
-    "repulsionAmount": 2,
-    "frictionAmount": 0.004
-  }, {
-    "title": "efervescent",
-    "description": "ends up looking like gas molecules escaping a liquid",
-
-    "pacmanX": false,
-    "pacmanY": false,
-
-    "gravity": true,
-    "friction": true,
-
-    "attraction": false,
-    "repulsion": true,
-
-    "limitVelocity": true,
-    "velocity": 4,
-
-    "colourBleed" : true,
-    "colourBleedIntensity": 0.5,
-
-    "tailLength": 4,
-    "tailModulo": 1,
-    "ballRadius": 12,
-
-    "lineOfSight": 95,
-    "cozyDistance": 96,
-    "gravityAmount": 2,
-    "attractionAmount": 2,
-    "repulsionAmount": 2,
-    "frictionAmount": 0.004
-  }, {
-    "title": "stream",
-    "description": "they self-organise to act as a stream",
-
-    "pacmanX": false,
-    "pacmanY": true,
-
-    "gravity": true,
-    "friction": true,
-
-    "attraction": true,
-    "repulsion": true,
-
-    "limitVelocity": true,
-    "velocity": 4,
-
-    "colourBleed": false,
-    "colourBleedIntensity": 0.5,
-
-    "tailLength": 4,
-    "tailModulo": 1,
-    "ballRadius": 12,
-
-    "lineOfSight": 95,
     "cozyDistance": 96,
     "gravityAmount": 2,
     "attractionAmount": 2,
