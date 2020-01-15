@@ -76,7 +76,11 @@ export class Ball {
         return force;
       },
 
-      getNeighbours: (theBalls = balls) => _.filter(theBalls, ball => (ball !== this && quanta.distanceSq(ball) < behaviour.lineOfSight_sq)),
+      getNeighbours: (theBalls = balls) => _.filter(theBalls, ball =>
+        ball !== this &&
+        Math.abs(this.pos.x - ball.pos.x) <= behaviour.lineOfSight &&
+        Math.abs(this.pos.y- ball.pos.y) <= behaviour.lineOfSight &&
+        quanta.distanceSq(ball) < behaviour.lineOfSight_sq),
       distanceSqFromPoint: (point) => (this.pos.x - point.x) **2 + (this.pos.y - point.y) **2,
       distanceSq: (ball) => quanta.distanceSqFromPoint(ball.pos),
       avoidMouse: () => this.vel.add(quanta.getRepulsiveForceFrom(p.createVector(p.mouseX, p.mouseY), behaviour.cozyDistance_sq)),
