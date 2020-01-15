@@ -2,7 +2,7 @@
   {
     "title": "default",
     "description": "",
-    "flock_size": 128,
+    "flock_size": 200,
     "width": 1400,
     "height": 800
   }, {

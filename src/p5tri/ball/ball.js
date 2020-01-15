@@ -19,10 +19,15 @@ export class Ball {
     this.tail = [this.pos];
   }
 
-  updateTail = (config) => {
+  updateTail = (config, tick) => {
+    const {tailLength, tailModulo} = config;
+
+    if(tailModulo > 0 && tick % tailModulo !== 0)
+      return;
+
     this.tail.push({...this.pos});
 
-    while(this.tail.length > config.tailLength * config.tailModulo)
+    while(this.tail.length > tailLength)
       this.tail.shift();
   };
 
@@ -130,14 +135,15 @@ export class Ball {
 
     this.pos.add(this.vel);
 
-    this.updateTail(behaviour);
+    this.updateTail(behaviour, tick);
 
     this.show(p, neighbours, behaviour, tick);
   };
 
   show = (p, neighbours, config) => {
+    const {tailLength, ballRadius, colourBleed, colourBleedIntensity} = config;
     const getColour = () => {
-      if(!config || !config.colourBleed)
+      if(!config || !colourBleed)
         return this.colour;
 
       const totals = { r: 0, g: 0, b:0, count:0 };
@@ -155,22 +161,30 @@ export class Ball {
         Math.floor(totals.b / totals.count)
       );
 
-      return p.lerpColor(this.colour, neighbourColor, config.colourBleedIntensity || 0);
+      return p.lerpColor(this.colour, neighbourColor, colourBleedIntensity || 0);
     };
 
-    let diameter = config.ballRadius * 2;
     const colour = getColour();
-    let sizeMultiplier = 1;
-    let cnt = 0;
+    let transp = 255;
+    let radius = ballRadius;
+    let radiusDiff = tailLength >= 0? radius / tailLength : 0;
 
-    for(let i = 0; i < this.tail.length && diameter > 0; i++) {
-      if(cnt++ % config.tailModulo !== 0) continue;
+    let transpFactor = (1 - 1 / tailLength);
 
-      p.strokeWeight(Math.floor((config.ballRadius * 2) * (this.tail.length - i + 1) / this.tail.length));
-      p.stroke(p.red(colour), p.green(colour), p.blue(colour), Math.floor(config.transparency * (this.tail.length - i) / this.tail.length));
-      p.point(this.tail[this.tail.length - i - 1].x, this.tail[this.tail.length - i - 1].y);
+    for(let i = 0; i < tailLength; i++) {
+      // if(tailModulo > 0 && i % tailModulo !== 0) continue;
 
-      sizeMultiplier = sizeMultiplier * config.tailSizeFactor;
+      p.strokeWeight(radius);
+
+      p.stroke(p.red(colour), p.green(colour), p.blue(colour), transp);
+
+      const tailElement = this.tail[tailLength - i - 1];
+
+      if(tailElement)
+        p.point(tailElement.x, tailElement.y);
+
+      transp *= transpFactor;     // exponential
+      radius -= radiusDiff; // linear
     }
   };
 }
