@@ -1,6 +1,6 @@
 export class Experiments {
 
-  exponent = 0;
+  exponent = 4;
 
   setup = (p, props) => {
     if (!p || !props) return;
@@ -10,7 +10,7 @@ export class Experiments {
     p.createCanvas(width, height);
     p.background(128);
 
-    p.noStroke();
+    // p.noStroke();
     this.max_distance = p.dist(0, 0, width, height);
   };
 

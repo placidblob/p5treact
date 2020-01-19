@@ -7,6 +7,8 @@ export const sketch = (p) => {
   p.setup = () => {
     console.log('$$$ SKETCH.SETUP()');
 
+    p.loop();
+
     getLogic().setup(p, globals.props, true);
   };
 
