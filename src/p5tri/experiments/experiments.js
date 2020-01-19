@@ -5,13 +5,17 @@ export class Experiments {
 
     const {width, height} = props.dishConfig;
 
-    p.angleMode(p.RADIANS);
-
     p.createCanvas(width, height);
     p.background(128);
+
+  };
+
+  mousePressed = (p, props) => {
+    console.log('mouse x y', p.mouseX, p.mouseY);
   };
 
   draw = (p, props) => {
+    p.background(200);
+
   };
 }
-
