@@ -30,4 +30,8 @@ export const sketch = (p) => {
   p.mousePressed = () =>
     getLogic().mousePressed &&
     getLogic().mousePressed(p, globals.props);
+
+  p.mouseWheel = (evt) =>
+    getLogic().mouseWheel &&
+    getLogic().mouseWheel(p, evt.deltaY < 0, globals.props);
 };

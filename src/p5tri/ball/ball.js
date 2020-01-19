@@ -194,8 +194,6 @@ export class Ball {
     let transpFactor = (1 - 1 / tailLength);
 
     for(let i = 0; i < tailLength; i++) {
-      // if(tailModulo > 0 && i % tailModulo !== 0) continue;
-
       p.strokeWeight(radius);
 
       p.stroke(p.red(colour), p.green(colour), p.blue(colour), transp);
