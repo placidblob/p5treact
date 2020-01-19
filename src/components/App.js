@@ -2,7 +2,7 @@ import { NavLink, Route, Switch } from "react-router-dom";
 import React from "react";
 import { hot } from "react-hot-loader";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFlask, faBug, faFireAlt, faCarrot, faKiwiBird } from '@fortawesome/free-solid-svg-icons'
+import { faFlask, faBug, faFireAlt, faCarrot, faKiwiBird, faPastafarianism } from '@fortawesome/free-solid-svg-icons'
 
 import AboutPage from "../pages/AboutPage";
 import PropTypes from "prop-types";
@@ -44,13 +44,19 @@ class App
           <span>ants</span>
         </NavLink>
       </Menu.Item>
-      <Menu.Item key="3" onClick={() => {this.props.actions.selectP5triType(dishType.EXPERIMENTS)}}>
+      <Menu.Item key="3" onClick={() => {this.props.actions.selectP5triType(dishType.PERLIN)}}>
+        <NavLink exact to="/">
+          <FontAwesomeIcon icon={faPastafarianism} style={{marginRight: '7px'}}/>
+          <span>perlin</span>
+        </NavLink>
+      </Menu.Item>
+      <Menu.Item key="10" onClick={() => {this.props.actions.selectP5triType(dishType.EXPERIMENTS)}}>
         <NavLink exact to="/">
           <FontAwesomeIcon icon={faFlask} style={{marginRight: '7px'}}/>
           <span>experiments</span>
         </NavLink>
       </Menu.Item>
-      <Menu.Item key="4">
+      <Menu.Item key="20">
         <NavLink exact to="/sandbox">
           <FontAwesomeIcon icon={faKiwiBird} style={{marginRight: '7px'}}/>
           <span>sandbox</span>

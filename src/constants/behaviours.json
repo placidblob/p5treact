@@ -23,6 +23,7 @@
     "ballRadius": 16,
     "initialTransp": 140,
 
+    "maxNeighbours": 12,
     "lineOfSight": 60,
     "cozyDistance": 50,
     "gravityAmount": 2,
@@ -53,6 +54,7 @@
     "ballRadius": 16,
     "initialTransp": 140,
 
+    "maxNeighbours": 0,
     "lineOfSight": 120,
     "cozyDistance": 30,
     "gravityAmount": 2,
@@ -83,6 +85,7 @@
     "ballRadius": 16,
     "initialTransp": 140,
 
+    "maxNeighbours": 0,
     "lineOfSight": 120,
     "cozyDistance": 90,
     "gravityAmount": 2,
@@ -113,6 +116,7 @@
     "ballRadius": 16,
     "initialTransp": 140,
 
+    "maxNeighbours": 0,
     "lineOfSight": 190,
     "cozyDistance": 96,
     "gravityAmount": 2,

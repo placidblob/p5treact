@@ -1,11 +1,9 @@
-export class Experiments {
+export class Empty {
 
   setup = (p, props) => {
     if (!p || !props) return;
 
     const {width, height} = props.dishConfig;
-
-    p.angleMode(p.RADIANS);
 
     p.createCanvas(width, height);
     p.background(128);

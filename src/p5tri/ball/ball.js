@@ -1,5 +1,6 @@
 import * as p5 from 'p5';
 import * as _ from 'lodash';
+import {OrderedList} from '../../utils'
 
 export class Ball {
 
@@ -81,11 +82,31 @@ export class Ball {
         return force;
       },
 
-      getNeighbours: (theBalls = balls) => _.filter(theBalls, ball =>
+      getNeighbours: (theBalls = balls) => {
+        const rtrn = new OrderedList();
+
+        const closeBalls = theBalls.filter(ball =>
+          ball !== this &&
+          Math.abs(this.pos.x - ball.pos.x) <= behaviour.lineOfSight &&
+          Math.abs(this.pos.y - ball.pos.y) <= behaviour.lineOfSight
+        );
+
+        for(let ball of closeBalls) {
+          const distanceSq = quanta.distanceSq(ball);
+
+          if(distanceSq <= behaviour.lineOfSight_sq)
+            rtrn.addItem(ball, distanceSq, behaviour.maxNeighbours);
+        }
+
+        return rtrn.list;
+      },
+
+      getAllNeighbours: (theBalls = balls) => _.filter(theBalls, ball =>
         ball !== this &&
         Math.abs(this.pos.x - ball.pos.x) <= behaviour.lineOfSight &&
-        Math.abs(this.pos.y- ball.pos.y) <= behaviour.lineOfSight &&
+        Math.abs(this.pos.y - ball.pos.y) <= behaviour.lineOfSight &&
         quanta.distanceSq(ball) < behaviour.lineOfSight_sq),
+
       distanceSqFromPoint: (point) => (this.pos.x - point.x) **2 + (this.pos.y - point.y) **2,
       distanceSq: (ball) => quanta.distanceSqFromPoint(ball.pos),
       avoidMouse: () => this.vel.add(quanta.getRepulsiveForceFrom(p.createVector(p.mouseX, p.mouseY), behaviour.cozyDistance_sq)),
@@ -115,7 +136,8 @@ export class Ball {
       limitVelocity: () => this.vel.mag() > behaviour.velocity && this.vel.setMag(behaviour.velocity),
     };
 
-    const neighbours = quanta.getNeighbours();
+    // const neighbours = quanta.getNeighbours();
+    const neighbours = quanta.getAllNeighbours();
 
     !behaviour.pacmanX && quanta.deflectX();
     !behaviour.pacmanY && quanta.deflectY();
@@ -183,8 +205,8 @@ export class Ball {
       if(tailElement)
         p.point(tailElement.x, tailElement.y);
 
-      transp *= transpFactor;     // exponential
-      radius -= radiusDiff; // linear
+      transp *= transpFactor;
+      radius -= radiusDiff;
     }
   };
 }
